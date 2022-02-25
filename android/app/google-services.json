@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "825907276006",
+    "project_id": "semicyuc-b4319",
+    "storage_bucket": "semicyuc-b4319.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:825907276006:android:aa8df1eb94f02bf549f327",
+        "android_client_info": {
+          "package_name": "com.esm.semicyuc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "825907276006-4m5ccht7nivbr6ann614vhmttln9atb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBggC29ZrXVkqcKt7XEUj2NcIaCfV6NsgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "825907276006-4m5ccht7nivbr6ann614vhmttln9atb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
