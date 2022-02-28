@@ -27,9 +27,7 @@ class Auth with ChangeNotifier {
 
   Future<bool> isLoggedIn() async {
     final prefs = await SharedPreferences.getInstance();
-    print('Im here 1');
     if (prefs.containsKey('Token')) {
-      print("Im here 2");
       _token = prefs.getString('Token').toString();
       _loggedIn = true;
       notifyListeners();
