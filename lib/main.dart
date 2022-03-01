@@ -9,7 +9,19 @@ import './screens/categories_screen.dart';
 import './utils/auth.dart';
 import './utils/categories.dart';
 
-void main() => runApp(MyApp());
+import 'package:flutter_appcenter_bundle/flutter_appcenter_bundle.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppCenter.startAsync(
+    appSecretAndroid: '49361c2e-b788-4bc2-a33d-838b04b3e06b',
+    appSecretIOS: '6520de7f-6b1f-42ca-be79-18cf36f6480a',
+    enableDistribute: false,
+  );
+  await AppCenter.configureDistributeDebugAsync(enabled: false);
+
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

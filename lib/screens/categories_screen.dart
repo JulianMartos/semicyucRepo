@@ -36,7 +36,7 @@ class _CartegoriesScreenState extends State<CartegoriesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var categorias = Provider.of<Categories>(context, listen: false).categorias;
+    // var categorias = Provider.of<Categories>(context, listen: false).categorias;
 
     return Scaffold(
       body: Center(
