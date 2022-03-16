@@ -33,9 +33,6 @@ class MyApp extends StatelessWidget {
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MultiProvider(
             providers: [
-              ChangeNotifierProvider<Categories>.value(
-                value: Categories(),
-              ),
               ChangeNotifierProvider<Topics>.value(
                 value: Topics(),
               ),

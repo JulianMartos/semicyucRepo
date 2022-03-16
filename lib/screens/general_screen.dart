@@ -44,7 +44,7 @@ class GeneralScreen extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
-                Provider.of<Auth>(context, listen: false).logout;
+                Provider.of<Auth>(context, listen: false).logout();
               },
               icon: const Icon(Icons.logout),
               color: Theme.of(context).primaryColor,
@@ -53,7 +53,7 @@ class GeneralScreen extends StatelessWidget {
         ],
       ),
       body: SafeArea(
-        child: Text(Provider.of<Auth>(context, listen: false).token), //_widget,
+        child: _widget,
       ),
     );
   }
