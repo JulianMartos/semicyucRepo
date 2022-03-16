@@ -5,19 +5,20 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import './../models/http_exception.dart';
+
 // import '../models/http_exception.dart';
 
 class Auth with ChangeNotifier {
-  late String? _token;
+  late String _token;
   late String? _username;
   bool _loggedIn = false;
 
   bool get isAuth {
-    print(_loggedIn);
     return _loggedIn;
   }
 
-  String? get token {
+  String get token {
     return _token;
   }
 
@@ -38,8 +39,9 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> logout() async {
-    _token = null;
+    _token = "";
     _loggedIn = false;
+    _username = "";
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
     notifyListeners();
@@ -57,8 +59,9 @@ class Auth with ChangeNotifier {
       );
       final responseData = json.decode(response.body);
       if (responseData['status'] == 'error') {
-        String error = responseData['result']['error_msg'];
-        throw (error);
+        var error = HttpException(responseData['result']['error_msg']);
+        // print(error);
+        throw error;
       }
       _token = responseData['result']['token'];
       _username = username;
@@ -67,7 +70,7 @@ class Auth with ChangeNotifier {
       final prefs = await SharedPreferences.getInstance();
       prefs.setString('Token', _token.toString());
     } catch (error) {
-      throw "error";
+      rethrow;
     }
   }
 }

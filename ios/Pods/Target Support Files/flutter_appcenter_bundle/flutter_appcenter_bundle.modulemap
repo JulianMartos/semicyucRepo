@@ -1,6 +1,0 @@
-framework module flutter_appcenter_bundle {
-  umbrella header "flutter_appcenter_bundle-umbrella.h"
-
-  export *
-  module * { export * }
-}

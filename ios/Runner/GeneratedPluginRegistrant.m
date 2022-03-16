@@ -18,10 +18,10 @@
 @import firebase_messaging;
 #endif
 
-#if __has_include(<flutter_appcenter_bundle/FlutterAppcenterBundlePlugin.h>)
-#import <flutter_appcenter_bundle/FlutterAppcenterBundlePlugin.h>
+#if __has_include(<flutter_local_notifications/FlutterLocalNotificationsPlugin.h>)
+#import <flutter_local_notifications/FlutterLocalNotificationsPlugin.h>
 #else
-@import flutter_appcenter_bundle;
+@import flutter_local_notifications;
 #endif
 
 #if __has_include(<shared_preferences_ios/FLTSharedPreferencesPlugin.h>)
@@ -35,7 +35,7 @@
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
-  [FlutterAppcenterBundlePlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterAppcenterBundlePlugin"]];
+  [FlutterLocalNotificationsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FlutterLocalNotificationsPlugin"]];
   [FLTSharedPreferencesPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTSharedPreferencesPlugin"]];
 }
 
