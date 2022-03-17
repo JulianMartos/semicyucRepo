@@ -111,11 +111,11 @@ class _CartegoriesScreenState extends State<MainScreen> {
         centerTitle: true,
         title: Image.asset(
           'assets/images/headLogo.png',
-          fit: BoxFit.cover,
-          height: 80,
+          fit: BoxFit.fitWidth,
+          height: 70,
         ),
         backgroundColor: Colors.white,
-        toolbarHeight: 87,
+        toolbarHeight: 77,
         elevation: 0,
         actions: [
           Padding(
@@ -141,33 +141,35 @@ class _CartegoriesScreenState extends State<MainScreen> {
       body: _pages[_selectedPageIdx],
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectPage,
+        enableFeedback: true,
         backgroundColor: Theme.of(context).primaryColor,
         currentIndex: _selectedPageIdx,
         unselectedItemColor: Colors.white,
         selectedItemColor: Colors.white,
-        type: BottomNavigationBarType.fixed,
+        type: BottomNavigationBarType.shifting,
         selectedFontSize: 18,
-        iconSize: 30,
-        items: const [
+        // showUnselectedLabels: false,
+        iconSize: 25,
+        items: [
           BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
             icon: FaIcon(
               FontAwesomeIcons.lightUser,
-              size: 30,
             ),
             label: "Area Privada",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
             icon: Icon(
               AppIcons.svgviewer_output,
-              size: 30,
               color: Colors.white,
             ),
             label: "Inicio",
           ),
           BottomNavigationBarItem(
+            backgroundColor: Theme.of(context).primaryColor,
             icon: FaIcon(
               FontAwesomeIcons.lightEnvelope,
-              size: 30,
             ),
             label: "Mensajes",
           ),

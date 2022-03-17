@@ -40,40 +40,60 @@ class _MessageListState extends State<MessageList> {
     super.initState();
   }
 
+  Future<void> _refreshMessages() =>
+      //Future.delayed(const Duration(seconds: 1), () {
+      Provider.of<MessageProvider>(context, listen: false)
+          .getMessages(Provider.of<Auth>(context, listen: false).token);
+
   @override
   Widget build(BuildContext context) {
     var _messages = Provider.of<MessageProvider>(context).messageList;
     if (!_loading) {
       context.loaderOverlay.hide();
-      return ListView.separated(
-        shrinkWrap: true,
-        reverse: true,
-        itemBuilder: (ctx, idx) {
-          return ListTile(
-            leading: CircleAvatar(
-              backgroundColor: Theme.of(context).primaryColor,
-              child: const FaIcon(FontAwesomeIcons.envelope),
-              radius: 25,
-            ),
-            title: Text(_messages[idx].title),
-            subtitle: Text(
-              _messages[idx].text,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            trailing: Text(_messages[idx].date.hour.toString() +
-                ':' +
-                _messages[idx].date.minute.toString()),
-            onTap: () {
-              Navigator.pushNamed(context, GeneralScreen.routeName, arguments: {
-                'widget': MessageContent(_messages[idx].id),
-              });
-            },
-            // shape: Border.all(),
-          );
-        },
-        separatorBuilder: (ctx, idx) => sdivider,
-        itemCount: _messages.length,
+      return RefreshIndicator(
+        color: Theme.of(context).primaryColor,
+        displacement: 10,
+        onRefresh: _refreshMessages,
+        child: ListView.separated(
+          itemBuilder: (ctx, index) {
+            int idx = _messages.length - index - 1;
+            return ListTile(
+              leading: CircleAvatar(
+                backgroundColor: Theme.of(context).primaryColor,
+                child: const FaIcon(FontAwesomeIcons.envelope),
+                radius: 25,
+              ),
+              title: Text(_messages[idx].title),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Para: ${_messages[idx].nombreTopico}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    "De: ${_messages[idx].sender}",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+              trailing: Text(_messages[idx].date.hour.toString() +
+                  ':' +
+                  _messages[idx].date.minute.toString()),
+              onTap: () {
+                Navigator.pushNamed(context, GeneralScreen.routeName,
+                    arguments: {
+                      'widget': MessageContent(_messages[idx].id),
+                    });
+              },
+              // shape: Border.all(),
+            );
+          },
+          separatorBuilder: (ctx, idx) => sdivider,
+          itemCount: _messages.length,
+        ),
       );
     } else {
       return Container();

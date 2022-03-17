@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -32,20 +33,20 @@ class MessageContent extends StatelessWidget {
               )
             ],
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 5),
           Text(
             "De: ${_message.sender}",
           ),
           Text(
             "Para: ${_message.nombreTopico}",
           ),
-          const SizedBox(height: 20),
-          Text("Asunto: ${_message.title}"),
           const SizedBox(height: 8),
+          Text("Asunto: ${_message.title}"),
+          const SizedBox(height: 4),
           Expanded(
             child: Container(
               width: double.infinity,
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 3.0, vertical: 0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
@@ -54,8 +55,9 @@ class MessageContent extends StatelessWidget {
                 ),
               ),
               child: SingleChildScrollView(
-                child: Text(_message.text),
-              ),
+                  child: Html(
+                data: _message.text,
+              )),
             ),
           ),
         ],

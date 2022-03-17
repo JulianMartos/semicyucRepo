@@ -78,7 +78,7 @@ class Topic with ChangeNotifier {
           var error = HttpException(_extractedData['result']['error_msg']);
           throw error;
         }
-
+        FirebaseMessaging.instance.unsubscribeFromTopic(slug);
         notifyListeners();
       }
     } catch (error) {

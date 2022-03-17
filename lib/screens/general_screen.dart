@@ -22,11 +22,11 @@ class GeneralScreen extends StatelessWidget {
         ),
         title: Image.asset(
           'assets/images/headLogo.png',
-          fit: BoxFit.cover,
-          height: 80,
+          fit: BoxFit.fitWidth,
+          height: 70,
         ),
         backgroundColor: Colors.white,
-        toolbarHeight: 87,
+        toolbarHeight: 77,
         elevation: 0,
         bottom: const PreferredSize(
           child: Divider(

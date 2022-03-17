@@ -3,11 +3,13 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import './../screens/general_screen.dart';
 import './../utils/auth.dart';
 import './../widgets/profile.dart';
 import './../widgets/topics_list.dart';
+import './private_area_button.dart';
 
 import '../utils/topics.dart';
 
@@ -28,7 +30,7 @@ class PrivateAreaWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: Text(
+            child: AutoSizeText(
               "Área de socio",
               style: Theme.of(context).textTheme.headline4,
             ),
@@ -39,150 +41,27 @@ class PrivateAreaWidget extends StatelessWidget {
               mainAxisSpacing: 10,
               crossAxisSpacing: 10,
               padding: const EdgeInsets.all(8.0),
-              childAspectRatio: 1,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      GeneralScreen.routeName,
-                      arguments: {
-                        "widget": const Profile(),
-                      },
-                    );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                        child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.lightUserCog,
-                            size: 60,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        Text(
-                          "Perfil",
-                          style: Theme.of(context).textTheme.headline5,
-                        )
-                      ],
-                    )),
-                  ),
+              childAspectRatio: 0.95,
+              children: const [
+                PrivateAreaButton(
+                  FontAwesomeIcons.lightUser,
+                  "mi \n PERFIL",
+                  Profile(),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    context.loaderOverlay.show();
-
-                    Provider.of<Topics>(context, listen: false)
-                        .fetchTopics(
-                          1,
-                          Provider.of<Auth>(context, listen: false).token,
-                        )
-                        .then(
-                          (_) => {
-                            context.loaderOverlay.hide(),
-                            Navigator.pushNamed(
-                              context,
-                              GeneralScreen.routeName,
-                              arguments: {
-                                "widget":
-                                    const TopicList(1, "Listas Generales"),
-                              },
-                            )
-                          },
-                        );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                        child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.lightList,
-                            size: 60,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        FittedBox(
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Text(
-                              "Listas Generales",
-                              maxLines: 2,
-                              softWrap: true,
-                              style: Theme.of(context).textTheme.headline5,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-                  ),
+                PrivateAreaButton(
+                  FontAwesomeIcons.lightList,
+                  "listas GENERALES",
+                  TopicList(1, "Listas Generales"),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    context.loaderOverlay.show();
-                    Provider.of<Topics>(context, listen: false)
-                        .fetchTopics(
-                          2,
-                          Provider.of<Auth>(context, listen: false).token,
-                        )
-                        .then(
-                          (_) => {
-                            context.loaderOverlay.hide(),
-                            Navigator.pushNamed(
-                              context,
-                              GeneralScreen.routeName,
-                              arguments: {
-                                "widget": const TopicList(
-                                    2, "Listas de Grupos de trabajo"),
-                              },
-                            )
-                          },
-                        );
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 2, color: Theme.of(context).primaryColor),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                        child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: FaIcon(
-                            FontAwesomeIcons.lightUsers,
-                            size: 60,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                        ),
-                        FittedBox(
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: Text(
-                                "Grupos de Trabajo",
-                                maxLines: 2,
-                                softWrap: true,
-                                style: Theme.of(context).textTheme.headline5,
-                              )),
-                        ),
-                      ],
-                    )),
-                  ),
+                PrivateAreaButton(
+                  FontAwesomeIcons.lightUsers,
+                  "grupos de TRABAJO",
+                  TopicList(2, "Grupos de Trabajo"),
+                ),
+                PrivateAreaButton(
+                  FontAwesomeIcons.lightChartNetwork,
+                  "otras SOCIEDADES",
+                  TopicList(3, "Sociedades Autonómicas y territoriales"),
                 ),
               ],
             ),
