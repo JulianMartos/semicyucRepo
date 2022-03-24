@@ -7,6 +7,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import './../models/http_exception.dart';
 
+import './../models/utils.dart';
+
 // import '../models/http_exception.dart';
 
 class Auth with ChangeNotifier {
@@ -48,8 +50,7 @@ class Auth with ChangeNotifier {
   }
 
   Future<void> login(String username, String password) async {
-    final url = Uri.parse(
-        'https://esmconsulting.es/desarrollo-api/api-flutter/auth.php');
+    final url = Uri.parse(SERVER_URL + LOGIN_ENDPOINT);
     try {
       final response = await http.post(
         url,
@@ -59,7 +60,8 @@ class Auth with ChangeNotifier {
       );
       final responseData = json.decode(response.body);
       if (responseData['status'] == 'error') {
-        var error = HttpException(responseData['result']['error_msg']);
+        var error = HttpException(responseData['result']['error_msg'],
+            int.parse(responseData['result']['error_id']));
         // print(error);
         throw error;
       }

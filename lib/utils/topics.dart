@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
+import 'package:semicyuc2/models/utils.dart';
 
 import '../models/http_exception.dart';
 
@@ -19,7 +20,8 @@ class Topics with ChangeNotifier {
 
   Future<void> fetchTopics(int idCategory, String token) async {
     final url = Uri.parse(
-        'https://esmconsulting.es/desarrollo-api/api-flutter//topicos?idcategoria=$idCategory');
+      SERVER_URL + TOPIC_ENDPOINT + '?idcategoria=$idCategory',
+    );
     try {
       final response = await http.get(
         url,
@@ -27,7 +29,13 @@ class Topics with ChangeNotifier {
       );
       print(response.body);
       final _extractedData = json.decode(response.body);
-      _topics = Topic.toList(_extractedData);
+      if (_extractedData['status'] == 'error') {
+        var error = HttpException(_extractedData['result']['error_msg'],
+            int.parse(_extractedData['result']['error_id']));
+        // print(error);
+        throw error;
+      }
+      _topics = Topic.toList(_extractedData['result']);
       notifyListeners();
     } catch (error) {
       rethrow;
@@ -56,7 +64,8 @@ class Topic with ChangeNotifier {
 
   Future<void> subscribe(String token) async {
     final url = Uri.parse(
-        "https://esmconsulting.es/desarrollo-api/api-flutter/suscripciones");
+      SERVER_URL + SUBSCRIPTIONS_ENDPOINT,
+    );
     final _headers = {"Token": token};
     final _json = jsonEncode({"idtopico": id.toString()});
     try {
@@ -65,7 +74,8 @@ class Topic with ChangeNotifier {
         final response = await http.post(url, headers: _headers, body: _json);
         final _extractedData = json.decode(response.body);
         if (_extractedData['status'] == 'error') {
-          var error = HttpException(_extractedData['result']['error_msg']);
+          var error = HttpException(_extractedData['result']['error_msg'],
+              int.parse(_extractedData['result']['error_id']));
           throw error;
         }
         FirebaseMessaging.instance.subscribeToTopic(slug);
@@ -75,7 +85,8 @@ class Topic with ChangeNotifier {
         final response = await http.delete(url, headers: _headers, body: _json);
         final _extractedData = json.decode(response.body);
         if (_extractedData['status'] == 'error') {
-          var error = HttpException(_extractedData['result']['error_msg']);
+          var error = HttpException(_extractedData['result']['error_msg'],
+              int.parse(_extractedData['result']['error_id']));
           throw error;
         }
         FirebaseMessaging.instance.unsubscribeFromTopic(slug);

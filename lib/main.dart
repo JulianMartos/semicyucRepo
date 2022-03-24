@@ -11,7 +11,6 @@ import './screens/main_screen.dart';
 import './screens/general_screen.dart';
 
 import './utils/auth.dart';
-import './utils/categories.dart';
 import './utils/message.dart';
 import './utils/topics.dart';
 

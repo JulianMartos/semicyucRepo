@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
@@ -5,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import './../utils/message.dart';
 import './../icons/app_icons.dart';
 import './../screens/general_screen.dart';
 import './../services/local_notification_service.dart';
@@ -13,6 +15,7 @@ import './../widgets/message_list.dart';
 import './../widgets/index.dart';
 import './../widgets/private_area.dart';
 import './../widgets/message.dart';
+import './../models/utils.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -49,6 +52,8 @@ class _CartegoriesScreenState extends State<MainScreen> {
   Future<void> requestPermision() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
 
+    print(await messaging.getToken());
+
     await messaging.requestPermission(
       alert: true,
       announcement: false,
@@ -73,9 +78,6 @@ class _CartegoriesScreenState extends State<MainScreen> {
       sound: true,
     );
 
-    FirebaseMessaging.instance.unsubscribeFromTopic("prueba_mensajes2");
-    FirebaseMessaging.instance.subscribeToTopic("prueba_notificaciones");
-
     FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null &&
           message.notification!.android != null) {
@@ -84,18 +86,26 @@ class _CartegoriesScreenState extends State<MainScreen> {
     });
 
     // FirebaseMessaging.onBackgroundMessage((message) => null)
-    FirebaseMessaging.instance.getInitialMessage().then((message) {
+    FirebaseMessaging.instance.getInitialMessage().then((message) async {
       if (message != null) {
         final _mesageId = message.data['idMensaje'];
+        await Provider.of<MessageProvider>(context, listen: false).getMessages(
+          Provider.of<Auth>(context, listen: false).token,
+        );
+
         Navigator.of(context).pushNamed(GeneralScreen.routeName, arguments: {
           'widget': MessageContent(int.parse(_mesageId)),
         });
       }
     });
     FirebaseMessaging.onMessageOpenedApp.listen(
-      (message) {
+      (message) async {
         if (message.notification != null) {
           final _mesageId = message.data['idMensaje'];
+          await Provider.of<MessageProvider>(context, listen: false)
+              .getMessages(
+            Provider.of<Auth>(context, listen: false).token,
+          );
           Navigator.of(context).pushNamed(GeneralScreen.routeName, arguments: {
             'widget': MessageContent(int.parse(_mesageId)),
           });
@@ -106,74 +116,99 @@ class _CartegoriesScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Image.asset(
-          'assets/images/headLogo.png',
-          fit: BoxFit.fitWidth,
-          height: 70,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Image.asset(
+            'assets/images/headLogo.png',
+            fit: BoxFit.fitWidth,
+            height: 70,
+          ),
+          backgroundColor: Colors.white,
+          toolbarHeight: 77,
+          elevation: 0,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10.0),
+              child: IconButton(
+                onPressed: Provider.of<Auth>(context).logout,
+                icon: const Icon(Icons.logout),
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+          ],
+          bottom: const PreferredSize(
+            child: Divider(
+              height: 10,
+              thickness: 2,
+              indent: 20,
+              endIndent: 20,
+              color: Colors.grey,
+            ),
+            preferredSize: Size.fromHeight(10),
+          ),
         ),
-        backgroundColor: Colors.white,
-        toolbarHeight: 77,
-        elevation: 0,
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10.0),
-            child: IconButton(
-              onPressed: Provider.of<Auth>(context).logout,
-              icon: const Icon(Icons.logout),
+        body: TabBarView(
+          children: _pages,
+        ),
+        bottomNavigationBar: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
               color: Theme.of(context).primaryColor,
+              height: 80,
+              width: MediaQuery.of(context).size.width,
+              child: TabBar(
+                indicatorColor: Theme.of(context).primaryColor,
+                tabs: const [
+                  Tab(
+                    icon: FaIcon(FontAwesomeIcons.lightUser),
+                    text: 'Area Privada',
+                  ),
+                  Tab(
+                    icon: Icon(
+                      AppIcons.svgviewer_output,
+                      color: Colors.white,
+                    ),
+                    text: 'Home',
+                  ),
+                  Tab(
+                    icon: FaIcon(FontAwesomeIcons.lightEnvelope),
+                    text: 'Mensajes',
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
-        bottom: const PreferredSize(
-          child: Divider(
-            height: 10,
-            thickness: 2,
-            indent: 20,
-            endIndent: 20,
-            color: Colors.grey,
-          ),
-          preferredSize: Size.fromHeight(10),
+            Container(
+              height:
+                  Theme.of(context).platform == TargetPlatform.iOS ? 40 : 25,
+              width: double.infinity,
+              alignment: Theme.of(context).platform == TargetPlatform.iOS
+                  ? Alignment.topCenter
+                  : Alignment.center,
+              child: const AutoSizeText(
+                "Desarrollado por ESM Consulting",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Colors.white,
+                ),
+              ),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                  colors: [
+                    Theme.of(context).primaryColor,
+                    OragneColor,
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-      body: _pages[_selectedPageIdx],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: _selectPage,
-        enableFeedback: true,
-        backgroundColor: Theme.of(context).primaryColor,
-        currentIndex: _selectedPageIdx,
-        unselectedItemColor: Colors.white,
-        selectedItemColor: Colors.white,
-        type: BottomNavigationBarType.shifting,
-        selectedFontSize: 18,
-        // showUnselectedLabels: false,
-        iconSize: 25,
-        items: [
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: FaIcon(
-              FontAwesomeIcons.lightUser,
-            ),
-            label: "Area Privada",
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: Icon(
-              AppIcons.svgviewer_output,
-              color: Colors.white,
-            ),
-            label: "Inicio",
-          ),
-          BottomNavigationBarItem(
-            backgroundColor: Theme.of(context).primaryColor,
-            icon: FaIcon(
-              FontAwesomeIcons.lightEnvelope,
-            ),
-            label: "Mensajes",
-          ),
-        ],
       ),
     );
   }

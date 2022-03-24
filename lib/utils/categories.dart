@@ -4,6 +4,9 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:semicyuc2/models/utils.dart';
+
+import '../models/http_exception.dart';
 
 class Categories with ChangeNotifier {
   List<Categoria> _categorias = [];
@@ -14,13 +17,20 @@ class Categories with ChangeNotifier {
 
   Future<void> obtenerCategorias() async {
     final url = Uri.parse(
-        'https://esmconsulting.es/desarrollo-api/api-flutter/categorias?page=1');
+      SERVER_URL + CATEGORY_ENDPOINT,
+    );
     try {
       final response = await http.get(
         url,
         headers: {"Token": "af39f07dc17af8c7358142aba02c37ad"},
       );
       final responseData = json.decode(response.body);
+      if (responseData['status'] == 'error') {
+        var error = HttpException(responseData['result']['error_msg'],
+            int.parse(responseData['result']['error_id']));
+        // print(error);
+        throw error;
+      }
       _categorias = Categoria.toList(responseData);
 
       notifyListeners();

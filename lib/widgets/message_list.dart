@@ -4,6 +4,7 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import '../models/http_exception.dart';
 import './../utils/message.dart';
 import './../screens/general_screen.dart';
 import './../utils/auth.dart';
@@ -31,19 +32,47 @@ class _MessageListState extends State<MessageList> {
   void initState() {
     context.loaderOverlay.show();
     _loading = true;
-    Provider.of<MessageProvider>(context, listen: false)
-        .getMessages(Provider.of<Auth>(context, listen: false).token)
-        .then((value) {
+    try {
+      _refreshMessages().then((value) {
+        context.loaderOverlay.hide();
+        _loading = false;
+      });
+    } on HttpException catch (error) {
       context.loaderOverlay.hide();
-      _loading = false;
-    });
+      _showErrorDialog(error);
+    }
     super.initState();
   }
 
-  Future<void> _refreshMessages() =>
-      //Future.delayed(const Duration(seconds: 1), () {
-      Provider.of<MessageProvider>(context, listen: false)
+  void _showErrorDialog(HttpException error) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: const Text('Ha ocurrido un error'),
+        content: Text(error.toString()),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Aceptar'),
+            onPressed: () {
+              if (error.statusCode == 401) {
+                Provider.of<Auth>(context, listen: false).logout();
+              }
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
+  Future<void> _refreshMessages() async {
+    try {
+      await Provider.of<MessageProvider>(context, listen: false)
           .getMessages(Provider.of<Auth>(context, listen: false).token);
+    } on HttpException catch (error) {
+      _showErrorDialog(error);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,46 +83,63 @@ class _MessageListState extends State<MessageList> {
         color: Theme.of(context).primaryColor,
         displacement: 10,
         onRefresh: _refreshMessages,
-        child: ListView.separated(
-          itemBuilder: (ctx, index) {
-            int idx = _messages.length - index - 1;
-            return ListTile(
-              leading: CircleAvatar(
-                backgroundColor: Theme.of(context).primaryColor,
-                child: const FaIcon(FontAwesomeIcons.envelope),
-                radius: 25,
-              ),
-              title: Text(_messages[idx].title),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        child: _messages.length == 0
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Para: ${_messages[idx].nombreTopico}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                    "No hay mensajes en los topicos a los que esta subscrito",
+                    textAlign: TextAlign.center,
                   ),
-                  Text(
-                    "De: ${_messages[idx].sender}",
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Theme.of(context).primaryColor,
+                    ),
+                    onPressed: _refreshMessages,
+                    child: Text("Actualizar"),
+                  )
                 ],
+              )
+            : ListView.separated(
+                itemBuilder: (ctx, index) {
+                  int idx = _messages.length - index - 1;
+                  return ListTile(
+                    leading: CircleAvatar(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      child: const FaIcon(FontAwesomeIcons.envelope),
+                      radius: 25,
+                    ),
+                    title: Text(_messages[idx].title),
+                    subtitle: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Para: ${_messages[idx].nombreTopico}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          "De: ${_messages[idx].sender}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ),
+                    trailing: Text(_messages[idx].date.hour.toString() +
+                        ':' +
+                        _messages[idx].date.minute.toString()),
+                    onTap: () {
+                      Navigator.pushNamed(context, GeneralScreen.routeName,
+                          arguments: {
+                            'widget': MessageContent(_messages[idx].id),
+                          });
+                    },
+                    // shape: Border.all(),
+                  );
+                },
+                separatorBuilder: (ctx, idx) => sdivider,
+                itemCount: _messages.length,
               ),
-              trailing: Text(_messages[idx].date.hour.toString() +
-                  ':' +
-                  _messages[idx].date.minute.toString()),
-              onTap: () {
-                Navigator.pushNamed(context, GeneralScreen.routeName,
-                    arguments: {
-                      'widget': MessageContent(_messages[idx].id),
-                    });
-              },
-              // shape: Border.all(),
-            );
-          },
-          separatorBuilder: (ctx, idx) => sdivider,
-          itemCount: _messages.length,
-        ),
       );
     } else {
       return Container();

@@ -3,6 +3,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:semicyuc2/models/utils.dart';
+
+import '../models/http_exception.dart';
 
 class Message {
   final int _id;
@@ -61,16 +64,25 @@ class MessageProvider with ChangeNotifier {
 
   Future<void> getMessages(String token) async {
     final url = Uri.parse(
-        'https://esmconsulting.es/desarrollo-api/api-flutter/mensajes');
+      SERVER_URL + MESSAGE_ENDPOINT,
+    );
     try {
       final response = await http.get(
         url,
         headers: {"Token": token},
       );
-      print(response.body);
-      print(token);
+
       final responseData = json.decode(response.body);
-      _messageList = Message.toList(responseData);
+      if (responseData['status'] == 'error') {
+        var error = HttpException(responseData['result']['error_msg'],
+            int.parse(responseData['result']['error_id']));
+        throw error;
+      }
+      if (responseData['result'] != null) {
+        _messageList = Message.toList(responseData['result']);
+      } else {
+        _messageList = [];
+      }
 
       notifyListeners();
     } catch (error) {
