@@ -36,7 +36,10 @@ class _TopicTileState extends State<TopicTile> {
   Widget build(BuildContext context) {
     return SwitchListTile.adaptive(
       activeColor: Theme.of(context).primaryColor,
-      title: Text(widget.topic.title),
+      title: Text(
+        widget.topic.title,
+        style: Theme.of(context).textTheme.headline5,
+      ),
       value: widget.topic.subscribed,
       onChanged: (value) async {
         try {

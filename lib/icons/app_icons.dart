@@ -21,6 +21,7 @@ class AppIcons {
   static const _kFontFam = 'AppIcons';
   static const String? _kFontPkg = null;
 
+  // ignore: constant_identifier_names
   static const IconData svgviewer_output =
       IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

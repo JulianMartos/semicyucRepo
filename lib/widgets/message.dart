@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:url_launcher/link.dart';
 
 import './../utils/message.dart';
+import './../models/utils.dart';
 
 class MessageContent extends StatelessWidget {
   final int id;
@@ -42,6 +45,31 @@ class MessageContent extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           Text("Asunto: ${_message.title}"),
+          if (_message.file != null)
+            Link(
+              target: LinkTarget.self,
+              uri: Uri.parse(
+                  "http://api.esmconsulting.es/uploads/" + _message.file!),
+              builder: (ctx, followLink) => TextButton(
+                onPressed: followLink,
+                child: FittedBox(
+                  child: Row(
+                    children: [
+                      FaIcon(
+                        FontAwesomeIcons.lightPaperclip,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      Text(
+                        _message.file!,
+                        style: TextStyle(
+                          color: darkBlue,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
           const SizedBox(height: 4),
           Expanded(
             child: Container(
@@ -51,7 +79,7 @@ class MessageContent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
                   color: Theme.of(context).primaryColor,
-                  width: 2,
+                  width: 1,
                 ),
               ),
               child: SingleChildScrollView(

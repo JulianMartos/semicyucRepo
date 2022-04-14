@@ -39,7 +39,6 @@ class LocalNotificationService {
         notDetails,
       );
     } on Exception catch (e) {
-      print(e);
       // TODO
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:semicyuc2/widgets/bottomBar.dart';
 
 import './../utils/auth.dart';
 
@@ -28,16 +29,6 @@ class GeneralScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         toolbarHeight: 77,
         elevation: 0,
-        bottom: const PreferredSize(
-          child: Divider(
-            height: 10,
-            thickness: 2,
-            indent: 20,
-            endIndent: 20,
-            color: Colors.grey,
-          ),
-          preferredSize: Size.fromHeight(10),
-        ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10.0),
@@ -52,9 +43,11 @@ class GeneralScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: SafeArea(
+      body: Padding(
+        padding: const EdgeInsets.only(bottom: 10.0),
         child: _widget,
       ),
+      bottomNavigationBar: const BottomBar(),
     );
   }
 }

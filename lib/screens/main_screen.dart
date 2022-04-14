@@ -1,10 +1,10 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:semicyuc2/widgets/bottomBar.dart';
 
 import './../utils/message.dart';
 import './../icons/app_icons.dart';
@@ -15,7 +15,6 @@ import './../widgets/message_list.dart';
 import './../widgets/index.dart';
 import './../widgets/private_area.dart';
 import './../widgets/message.dart';
-import './../models/utils.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
@@ -29,9 +28,9 @@ class _CartegoriesScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     const PrivateAreaWidget(),
     const IndexWidget(),
-    LoaderOverlay(
+    const LoaderOverlay(
         useDefaultLoading: false,
-        overlayWidget: const Center(
+        overlayWidget: Center(
           child: SpinKitCubeGrid(
             color: Color.fromRGBO(243, 1, 0, 1.0),
             size: 50.0,
@@ -41,18 +40,8 @@ class _CartegoriesScreenState extends State<MainScreen> {
     // Buscar(),
   ];
 
-  int _selectedPageIdx = 1;
-
-  void _selectPage(int idx) {
-    setState(() {
-      _selectedPageIdx = idx;
-    });
-  }
-
   Future<void> requestPermision() async {
     FirebaseMessaging messaging = FirebaseMessaging.instance;
-
-    print(await messaging.getToken());
 
     await messaging.requestPermission(
       alert: true,
@@ -118,6 +107,7 @@ class _CartegoriesScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
+      initialIndex: 1,
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -139,16 +129,6 @@ class _CartegoriesScreenState extends State<MainScreen> {
               ),
             ),
           ],
-          bottom: const PreferredSize(
-            child: Divider(
-              height: 10,
-              thickness: 2,
-              indent: 20,
-              endIndent: 20,
-              color: Colors.grey,
-            ),
-            preferredSize: Size.fromHeight(10),
-          ),
         ),
         body: TabBarView(
           children: _pages,
@@ -159,54 +139,33 @@ class _CartegoriesScreenState extends State<MainScreen> {
           children: [
             Container(
               color: Theme.of(context).primaryColor,
-              height: 80,
+              height: 70,
               width: MediaQuery.of(context).size.width,
               child: TabBar(
                 indicatorColor: Theme.of(context).primaryColor,
                 tabs: const [
                   Tab(
-                    icon: FaIcon(FontAwesomeIcons.lightUser),
-                    text: 'Area Privada',
+                    icon: FaIcon(
+                      FontAwesomeIcons.lightUser,
+                      size: 40,
+                    ),
                   ),
                   Tab(
                     icon: Icon(
                       AppIcons.svgviewer_output,
-                      color: Colors.white,
+                      size: 45,
                     ),
-                    text: 'Home',
                   ),
                   Tab(
-                    icon: FaIcon(FontAwesomeIcons.lightEnvelope),
-                    text: 'Mensajes',
+                    icon: FaIcon(
+                      FontAwesomeIcons.lightEnvelope,
+                      size: 40,
+                    ),
                   ),
                 ],
               ),
             ),
-            Container(
-              height:
-                  Theme.of(context).platform == TargetPlatform.iOS ? 40 : 25,
-              width: double.infinity,
-              alignment: Theme.of(context).platform == TargetPlatform.iOS
-                  ? Alignment.topCenter
-                  : Alignment.center,
-              child: const AutoSizeText(
-                "Desarrollado por ESM Consulting",
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-              ),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    Theme.of(context).primaryColor,
-                    OragneColor,
-                  ],
-                ),
-              ),
-            ),
+            const BottomBar()
           ],
         ),
       ),

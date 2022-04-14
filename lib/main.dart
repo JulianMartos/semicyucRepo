@@ -42,33 +42,33 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
                 title: 'Semi',
                 theme: ThemeData(
-                  fontFamily: 'Lato',
+                  fontFamily: 'Monserrat',
                   primarySwatch: generateMaterialColor(
                       const Color.fromRGBO(126, 136, 144, 1.0)),
                   primaryColor: const Color.fromRGBO(243, 1, 0, 1.0),
-                  textTheme: const TextTheme(
+                  textTheme: TextTheme(
                     bodyText1: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: grey,
                     ),
                     bodyText2: TextStyle(
-                      fontSize: 16,
-                      // fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: darkBlue,
                     ),
                     headline3: TextStyle(
-                      fontSize: 27,
+                      fontSize: 22,
                       fontWeight: FontWeight.w500,
-                      color: Color.fromRGBO(228, 131, 80, 1.0),
+                      color: darkBlue,
                     ),
                     headline4: TextStyle(
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromRGBO(228, 131, 80, 1.0),
+                      fontWeight: FontWeight.w500,
+                      color: darkBlue,
                     ),
                     headline5: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(243, 1, 0, 1.0),
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: darkBlue,
                     ),
                   ),
                 ),

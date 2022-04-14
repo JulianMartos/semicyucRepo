@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
+import './../models/utils.dart';
 import '../models/http_exception.dart';
 import './../utils/message.dart';
 import './../screens/general_screen.dart';
@@ -11,7 +10,7 @@ import './../utils/auth.dart';
 import './../widgets/message.dart';
 
 class MessageList extends StatefulWidget {
-  MessageList({Key? key}) : super(key: key);
+  const MessageList({Key? key}) : super(key: key);
 
   @override
   State<MessageList> createState() => _MessageListState();
@@ -65,6 +64,14 @@ class _MessageListState extends State<MessageList> {
     );
   }
 
+  String removeAllHtmlTags(String htmlText) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+    RegExp exp2 = RegExp(r"\n\n", multiLine: true, caseSensitive: true);
+
+    return htmlText.replaceAll(exp, '').replaceAll(exp2, ' ');
+    // return htmlText.replaceAll(exp, '');
+  }
+
   Future<void> _refreshMessages() async {
     try {
       await Provider.of<MessageProvider>(context, listen: false)
@@ -79,70 +86,157 @@ class _MessageListState extends State<MessageList> {
     var _messages = Provider.of<MessageProvider>(context).messageList;
     if (!_loading) {
       context.loaderOverlay.hide();
-      return RefreshIndicator(
-        color: Theme.of(context).primaryColor,
-        displacement: 10,
-        onRefresh: _refreshMessages,
-        child: _messages.length == 0
-            ? Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "No hay mensajes en los topicos a los que esta subscrito",
-                    textAlign: TextAlign.center,
-                  ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                    ),
-                    onPressed: _refreshMessages,
-                    child: Text("Actualizar"),
-                  )
-                ],
-              )
-            : ListView.separated(
-                itemBuilder: (ctx, index) {
-                  int idx = _messages.length - index - 1;
-                  return ListTile(
-                    leading: CircleAvatar(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: const FaIcon(FontAwesomeIcons.envelope),
-                      radius: 25,
-                    ),
-                    title: Text(_messages[idx].title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Para: ${_messages[idx].nombreTopico}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Text(
-                          "De: ${_messages[idx].sender}",
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
-                    ),
-                    trailing: Text(_messages[idx].date.hour.toString() +
-                        ':' +
-                        _messages[idx].date.minute.toString()),
-                    onTap: () {
-                      Navigator.pushNamed(context, GeneralScreen.routeName,
-                          arguments: {
-                            'widget': MessageContent(_messages[idx].id),
-                          });
-                    },
-                    // shape: Border.all(),
-                  );
-                },
-                separatorBuilder: (ctx, idx) => sdivider,
-                itemCount: _messages.length,
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Text(
+              'Mis Mensajes'.toUpperCase(),
+              style: Theme.of(context).textTheme.headline3,
+            ),
+          ),
+          Expanded(
+            // height: MediaQuery.of(context).size.height * 0.65,
+            child: Container(
+              margin:
+                  const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(3),
+                color: lightBlue,
+                border: Border.all(
+                  color: darkBlue,
+                  width: 1,
+                ),
               ),
+              child: RefreshIndicator(
+                color: Theme.of(context).primaryColor,
+                displacement: 10,
+                onRefresh: _refreshMessages,
+                child: _messages.isEmpty
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text(
+                            "No hay mensajes en los topicos a los que esta subscrito",
+                            textAlign: TextAlign.center,
+                          ),
+                          ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Theme.of(context).primaryColor,
+                            ),
+                            onPressed: _refreshMessages,
+                            child: const Text("Actualizar"),
+                          )
+                        ],
+                      )
+                    : ListView.separated(
+                        itemBuilder: (ctx, index) {
+                          int idx = _messages.length - index - 1;
+                          return ListTile(
+                            title: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  _messages[idx].sender,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: darkBlue,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                                Text(
+                                  _messages[idx].title,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: darkBlue,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                                Container(
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(color: midBlue),
+                                  child: Row(
+                                    children: [
+                                      Container(
+                                        width: 6,
+                                        height: 6,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Theme.of(context).primaryColor,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          " ${_messages[idx].nombreTopico}",
+                                          softWrap: true,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                            color: darkBlue,
+                                            fontSize: 15,
+                                            fontStyle: FontStyle.italic,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Text(
+                                  removeAllHtmlTags(_messages[idx].text),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    color: grey,
+                                    fontSize: 15,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, GeneralScreen.routeName,
+                                  arguments: {
+                                    'widget': MessageContent(_messages[idx].id),
+                                  });
+                            },
+                          );
+                        },
+                        separatorBuilder: (ctx, idx) => sdivider,
+                        itemCount: _messages.length,
+                      ),
+              ),
+            ),
+          ),
+        ],
       );
     } else {
-      return Container();
+      return Center(
+        child: Container(),
+      );
     }
   }
 }
+
+
+//       return Container(
+//         margin: EdgeInsets.symmetric(horizontal: 10.0),
+//         decoration: BoxDecoration(
+//           borderRadius: BorderRadius.circular(3),
+//           color: lightBlue,
+//           border: Border.all(
+//             color: darkBlue,
+//             width: 1,
+//           ),
+//         ),
+//         child: 
+//       );
+//     } else {
+//       return Container();
+//     }
+//   }
+// }

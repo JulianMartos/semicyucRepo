@@ -27,7 +27,6 @@ class Topics with ChangeNotifier {
         url,
         headers: {"Token": token},
       );
-      print(response.body);
       final _extractedData = json.decode(response.body);
       if (_extractedData['status'] == 'error') {
         var error = HttpException(_extractedData['result']['error_msg'],
@@ -35,7 +34,11 @@ class Topics with ChangeNotifier {
         // print(error);
         throw error;
       }
-      _topics = Topic.toList(_extractedData['result']);
+      if (_extractedData['result'] != null) {
+        _topics = Topic.toList(_extractedData['result']);
+      } else {
+        _topics = [];
+      }
       notifyListeners();
     } catch (error) {
       rethrow;

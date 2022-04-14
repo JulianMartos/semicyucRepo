@@ -8,8 +8,6 @@ import '../screens/general_screen.dart';
 import '../utils/auth.dart';
 import '../utils/topics.dart';
 
-import './topics_list.dart';
-
 class PrivateAreaButton extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -68,10 +66,11 @@ class PrivateAreaButton extends StatelessWidget {
                     padding: const EdgeInsets.all(5.0),
                     child: AutoSizeText(
                       text,
+                      textScaleFactor: 1.0,
                       maxLines: 4,
                       softWrap: true,
                       textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.bodyText2,
                     )),
               ),
             ],

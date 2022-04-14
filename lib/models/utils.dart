@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 
@@ -34,11 +36,16 @@ Color shadeColor(Color color, double factor) => Color.fromRGBO(
     shadeValue(color.blue, factor),
     1);
 
-String SERVER_URL = 'http://api.esmconsulting.es/semicyuc/';
+String SERVER_URL = 'https://api.esmconsulting.es/semicyuc/';
 String CATEGORY_ENDPOINT = 'categorias';
 String TOPIC_ENDPOINT = 'topicos';
-String SUBSCRIPTIONS_ENDPOINT = 'suscripciones';
-String LOGIN_ENDPOINT = 'auth';
+String SUBSCRIPTIONS_ENDPOINT = 'notificaciones';
+String LOGIN_ENDPOINT = 'login';
 String MESSAGE_ENDPOINT = 'mensajes';
+String LOGOUT_ENDPINT = 'logout';
 
-Color OragneColor = Color.fromRGBO(228, 131, 80, 1.0);
+Color OragneColor = const Color.fromRGBO(228, 131, 80, 1.0);
+Color darkBlue = const Color.fromRGBO(0, 101, 170, 1.0);
+Color midBlue = const Color.fromRGBO(200, 237, 255, 1.0);
+Color lightBlue = const Color.fromRGBO(248, 254, 255, 1.0);
+Color grey = const Color.fromRGBO(126, 136, 144, 1.0);

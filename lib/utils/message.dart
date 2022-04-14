@@ -15,6 +15,7 @@ class Message {
   final int _topicId;
   final String _sender;
   final String _nombreTopico;
+  final _file;
 
   Message(
     this._id,
@@ -24,6 +25,7 @@ class Message {
     this._topicId,
     this._sender,
     this._nombreTopico,
+    this._file,
   );
 
   int get id => _id;
@@ -33,6 +35,7 @@ class Message {
   int get topicId => _topicId;
   String get sender => _sender;
   String get nombreTopico => _nombreTopico;
+  String? get file => _file;
 
   static List<Message> toList(List<dynamic> jsonDecoded) {
     List<Message> lista = [];
@@ -44,8 +47,9 @@ class Message {
           element['cuerpo'],
           DateTime.parse(element['fecha']),
           int.parse(element['idtopico']),
-          element['idusuario'],
+          element['usuario'],
           element['nombretopico'],
+          (element['archivo'] != null) ? element['archivo'] : null,
         ),
       );
     }
