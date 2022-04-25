@@ -129,7 +129,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                           thickness: 1,
                                           indent: 10,
                                           endIndent: 10,
-                                          color: darkBlue,
+                                          color: midBlue,
                                         ),
                                     shrinkWrap: true,
                                     itemCount: _topicList1.length,
@@ -139,9 +139,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                             Theme.of(context).primaryColor,
                                         title: Text(
                                           _topicList1[idx].title,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5,
                                         ),
                                         value: _topicList1[idx].subscribed,
                                         onChanged: (value) async {
@@ -184,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                           thickness: 1,
                                           indent: 10,
                                           endIndent: 10,
-                                          color: darkBlue,
+                                          color: midBlue,
                                         ),
                                     shrinkWrap: true,
                                     itemCount: _topicList2.length,
@@ -194,9 +191,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                             Theme.of(context).primaryColor,
                                         title: Text(
                                           _topicList2[idx].title,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5,
                                         ),
                                         value: _topicList2[idx].subscribed,
                                         onChanged: (value) async {
@@ -239,7 +233,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                           thickness: 1,
                                           indent: 10,
                                           endIndent: 10,
-                                          color: darkBlue,
+                                          color: midBlue,
                                         ),
                                     shrinkWrap: true,
                                     itemCount: _topicList3.length,
@@ -249,9 +243,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                             Theme.of(context).primaryColor,
                                         title: Text(
                                           _topicList3[idx].title,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5,
                                         ),
                                         value: _topicList3[idx].subscribed,
                                         onChanged: (value) async {

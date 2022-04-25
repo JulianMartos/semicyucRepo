@@ -36,10 +36,7 @@ class AuthScreen extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(top: deviceSize.height * 0.2),
-                    child: Flexible(
-                      flex: deviceSize.width > 600 ? 2 : 1,
-                      child: const AuthCard(),
-                    ),
+                    child: const AuthCard(),
                   ),
                 ],
               ),
@@ -172,8 +169,8 @@ class _AuthCardState extends State<AuthCard> {
                   const CircularProgressIndicator()
                 else
                   RaisedButton(
-                    child:
-                        Text(_authMode == AuthMode.login ? 'LOGIN' : 'SIGN UP'),
+                    child: Text(
+                        _authMode == AuthMode.login ? 'ACCEDER' : 'SIGN UP'),
                     onPressed: _submit,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),

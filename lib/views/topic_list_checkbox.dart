@@ -105,7 +105,7 @@ class _CheckBoxListState extends State<CheckBoxList> {
                                 activeColor: Theme.of(context).primaryColor,
                                 title: Text(
                                   _listTopics[idx].title,
-                                  style: Theme.of(context).textTheme.headline5,
+                                  // style: Theme.of(context).textTheme.headline5,
                                 ),
                                 value: _checked,
                                 onChanged: (value) async {

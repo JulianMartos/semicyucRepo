@@ -118,7 +118,7 @@ class _SwitchListState extends State<SwitchList> {
                               activeColor: Theme.of(context).primaryColor,
                               title: Text(
                                 _listTopics[idx].title,
-                                style: Theme.of(context).textTheme.headline5,
+                                // style: Theme.of(context).textTheme.headline5,
                               ),
                               value: _listTopics[idx].subscribed,
                               onChanged: (value) async {

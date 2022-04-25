@@ -53,38 +53,38 @@ class MyApp extends StatelessWidget {
             child: MaterialApp(
                 title: 'Semi',
                 theme: ThemeData(
-                  backgroundColor: Colors.white,
-                  scaffoldBackgroundColor: Colors.white,
-                  fontFamily: 'Monserrat',
-                  primarySwatch: generateMaterialColor(
-                      const Color.fromRGBO(126, 136, 144, 1.0)),
-                  primaryColor: const Color.fromRGBO(243, 1, 0, 1.0),
-                  textTheme: TextTheme(
-                    bodyText1: TextStyle(
-                      fontSize: 15,
-                      color: grey,
+                    backgroundColor: Colors.white,
+                    scaffoldBackgroundColor: Colors.white,
+                    fontFamily: 'Monserrat',
+                    primarySwatch: generateMaterialColor(
+                        const Color.fromRGBO(126, 136, 144, 1.0)),
+                    primaryColor: const Color.fromRGBO(243, 1, 0, 1.0),
+                    textTheme: TextTheme(
+                      bodyText1: TextStyle(
+                        fontSize: 15,
+                        color: grey,
+                      ),
+                      bodyText2: TextStyle(
+                        fontSize: 15,
+                        color: darkBlue,
+                      ),
+                      headline3: TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w500,
+                        color: darkBlue,
+                      ),
+                      headline4: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                        color: darkBlue,
+                      ),
+                      headline5: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.w500,
+                        color: darkBlue,
+                      ),
                     ),
-                    bodyText2: TextStyle(
-                      fontSize: 15,
-                      color: darkBlue,
-                    ),
-                    headline3: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w500,
-                      color: darkBlue,
-                    ),
-                    headline4: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
-                      color: darkBlue,
-                    ),
-                    headline5: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                      color: darkBlue,
-                    ),
-                  ),
-                ),
+                    dividerColor: darkBlue),
                 routes: {
                   AuthScreen.routeName: (context) => const AuthScreen(),
                   GeneralScreen.routeName: (context) => const GeneralScreen(),
