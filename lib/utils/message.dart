@@ -47,7 +47,7 @@ class Message {
           element['cuerpo'],
           DateTime.parse(element['fecha']),
           int.parse(element['idtopico']),
-          element['usuario'],
+          element['nombre'] + ' ' + element['apellido'],
           element['nombretopico'],
           (element['archivo'] != null) ? element['archivo'] : null,
         ),

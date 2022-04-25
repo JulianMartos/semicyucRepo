@@ -39,10 +39,12 @@ Color shadeColor(Color color, double factor) => Color.fromRGBO(
 String SERVER_URL = 'https://api.esmconsulting.es/semicyuc/';
 String CATEGORY_ENDPOINT = 'categorias';
 String TOPIC_ENDPOINT = 'topicos';
-String SUBSCRIPTIONS_ENDPOINT = 'notificaciones';
+String NOTIFICATION_ENDPOINT = 'notificaciones';
+String SUSCRIPTION_ENDPOINT = 'suscripciones';
 String LOGIN_ENDPOINT = 'login';
 String MESSAGE_ENDPOINT = 'mensajes';
 String LOGOUT_ENDPINT = 'logout';
+String USER_ENDPOINT = 'usuario';
 
 Color OragneColor = const Color.fromRGBO(228, 131, 80, 1.0);
 Color darkBlue = const Color.fromRGBO(0, 101, 170, 1.0);

@@ -19,15 +19,10 @@ class AuthScreen extends StatelessWidget {
       body: Stack(
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  const Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  const Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                stops: const [0, 1],
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/backgroudLogin.png'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -36,12 +31,15 @@ class AuthScreen extends StatelessWidget {
               height: deviceSize.height,
               width: deviceSize.width,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Flexible(
-                    flex: deviceSize.width > 600 ? 2 : 1,
-                    child: const AuthCard(),
+                  Padding(
+                    padding: EdgeInsets.only(top: deviceSize.height * 0.2),
+                    child: Flexible(
+                      flex: deviceSize.width > 600 ? 2 : 1,
+                      child: const AuthCard(),
+                    ),
                   ),
                 ],
               ),
@@ -125,7 +123,7 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
-        height: _authMode == AuthMode.signUp ? 320 : 260,
+        height: 320,
         constraints:
             BoxConstraints(minHeight: _authMode == AuthMode.signUp ? 320 : 260),
         width: deviceSize.width * 0.75,
@@ -135,6 +133,11 @@ class _AuthCardState extends State<AuthCard> {
           child: SingleChildScrollView(
             child: Column(
               children: <Widget>[
+                Image.asset(
+                  'assets/images/headLogo.png',
+                  fit: BoxFit.fitWidth,
+                  height: 70,
+                ),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Usuario'),
                   keyboardType: TextInputType.text,

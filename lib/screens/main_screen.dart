@@ -4,17 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:semicyuc2/widgets/bottomBar.dart';
 
+import './../widgets/bottomBar.dart';
 import './../utils/message.dart';
 import './../icons/app_icons.dart';
 import './../screens/general_screen.dart';
 import './../services/local_notification_service.dart';
 import './../utils/auth.dart';
-import './../widgets/message_list.dart';
-import './../widgets/index.dart';
-import './../widgets/private_area.dart';
-import './../widgets/message.dart';
+import './../views/message_list.dart';
+import './../views/index.dart';
+import './../views/private_area.dart';
+import './../views/message.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);

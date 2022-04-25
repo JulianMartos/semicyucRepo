@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:semicyuc2/utils/suscriptionTopics.dart';
+import 'package:semicyuc2/utils/usuario.dart';
 
 import './models/utils.dart';
 
@@ -12,7 +14,7 @@ import './screens/general_screen.dart';
 
 import './utils/auth.dart';
 import './utils/message.dart';
-import './utils/topics.dart';
+import 'utils/notificationTopics.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,16 +34,27 @@ class MyApp extends StatelessWidget {
         child: Consumer<Auth>(
           builder: (ctx, auth, _) => MultiProvider(
             providers: [
-              ChangeNotifierProvider<Topics>.value(
-                value: Topics(),
+              ChangeNotifierProvider<NotificationsTopics>.value(
+                value: NotificationsTopics(),
+              ),
+              ChangeNotifierProvider<NotificationsTopics>.value(
+                value: NotificationsTopics(),
+              ),
+              ChangeNotifierProvider<SuscriptionTopics>.value(
+                value: SuscriptionTopics(),
               ),
               ChangeNotifierProvider<MessageProvider>.value(
                 value: MessageProvider(),
-              )
+              ),
+              ChangeNotifierProvider<UserProvider>.value(
+                value: UserProvider(),
+              ),
             ],
             child: MaterialApp(
                 title: 'Semi',
                 theme: ThemeData(
+                  backgroundColor: Colors.white,
+                  scaffoldBackgroundColor: Colors.white,
                   fontFamily: 'Monserrat',
                   primarySwatch: generateMaterialColor(
                       const Color.fromRGBO(126, 136, 144, 1.0)),
