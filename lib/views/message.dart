@@ -21,10 +21,35 @@ class MessageContent extends StatelessWidget {
         Provider.of<MessageProvider>(context, listen: false).getMessageById(id);
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(bottom: 10.0, left: 10, right: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              Text(
+                "De: ",
+                style: labelBold,
+              ),
+              Text(
+                _message.sender,
+                style: labelRegular,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Text(
+                "Para: ",
+                style: labelBold,
+              ),
+              Text(
+                _message.nombreTopico,
+                style: labelRegular,
+              ),
+            ],
+          ),
+          const SizedBox(height: 5),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,13 +63,10 @@ class MessageContent extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(
-            "De: ${_message.sender}",
+            _message.title,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          Text(
-            "Para: ${_message.nombreTopico}",
-          ),
-          const SizedBox(height: 8),
-          Text("Asunto: ${_message.title}"),
+          const SizedBox(height: 5),
           if (_message.file != null)
             Link(
               target: LinkTarget.self,
@@ -78,7 +100,7 @@ class MessageContent extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
-                  color: Theme.of(context).primaryColor,
+                  color: grey,
                   width: 1,
                 ),
               ),

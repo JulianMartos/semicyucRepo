@@ -124,11 +124,17 @@ class _CartegoriesScreenState extends State<MainScreen> {
               padding: const EdgeInsets.only(right: 10.0),
               child: IconButton(
                 onPressed: Provider.of<Auth>(context).logout,
-                icon: const Icon(Icons.logout),
+                icon: const Icon(FontAwesomeIcons.signOut),
                 color: Theme.of(context).primaryColor,
               ),
             ),
           ],
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(
+              MediaQuery.of(context).size.height * 0.03,
+            ),
+            child: SizedBox(),
+          ),
         ),
         body: TabBarView(
           children: _pages,

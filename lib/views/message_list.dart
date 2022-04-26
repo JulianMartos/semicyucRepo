@@ -96,7 +96,7 @@ class _MessageListState extends State<MessageList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(bottom: 10.0, left: 10, right: 10),
             child: Text(
               'Mis Mensajes'.toUpperCase(),
               style: Theme.of(context).textTheme.headline3,

@@ -37,9 +37,6 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider<NotificationsTopics>.value(
                 value: NotificationsTopics(),
               ),
-              ChangeNotifierProvider<NotificationsTopics>.value(
-                value: NotificationsTopics(),
-              ),
               ChangeNotifierProvider<SuscriptionTopics>.value(
                 value: SuscriptionTopics(),
               ),
@@ -51,40 +48,44 @@ class MyApp extends StatelessWidget {
               ),
             ],
             child: MaterialApp(
-                title: 'Semi',
+                title: 'SEMICYUC',
                 theme: ThemeData(
-                    backgroundColor: Colors.white,
-                    scaffoldBackgroundColor: Colors.white,
-                    fontFamily: 'Monserrat',
-                    primarySwatch: generateMaterialColor(
-                        const Color.fromRGBO(126, 136, 144, 1.0)),
-                    primaryColor: const Color.fromRGBO(243, 1, 0, 1.0),
-                    textTheme: TextTheme(
-                      bodyText1: TextStyle(
-                        fontSize: 15,
-                        color: grey,
-                      ),
-                      bodyText2: TextStyle(
-                        fontSize: 15,
-                        color: darkBlue,
-                      ),
-                      headline3: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                        color: darkBlue,
-                      ),
-                      headline4: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
-                        color: darkBlue,
-                      ),
-                      headline5: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                        color: darkBlue,
-                      ),
+                  backgroundColor: Colors.white,
+                  scaffoldBackgroundColor: Colors.white,
+                  fontFamily: 'Monserrat',
+                  primarySwatch: generateMaterialColor(
+                      const Color.fromRGBO(126, 136, 144, 1.0)),
+                  primaryColor: const Color.fromRGBO(243, 1, 0, 1.0),
+                  textTheme: TextTheme(
+                    bodyText1: TextStyle(
+                      fontSize: 16,
+                      color: grey,
                     ),
-                    dividerColor: darkBlue),
+                    bodyText2: TextStyle(
+                      fontSize: 15,
+                      color: darkBlue,
+                    ),
+                    headline1: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.w500,
+                      color: darkBlue,
+                    ),
+                    headline2: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: darkBlue,
+                    ),
+                    headline3: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                      color: darkBlue,
+                    ),
+                  ),
+                  dividerColor: darkBlue,
+                  iconTheme: IconThemeData(
+                    size: 30,
+                  ),
+                ),
                 routes: {
                   AuthScreen.routeName: (context) => const AuthScreen(),
                   GeneralScreen.routeName: (context) => const GeneralScreen(),

@@ -51,3 +51,13 @@ Color darkBlue = const Color.fromRGBO(0, 101, 170, 1.0);
 Color midBlue = const Color.fromRGBO(200, 237, 255, 1.0);
 Color lightBlue = const Color.fromRGBO(248, 254, 255, 1.0);
 Color grey = const Color.fromRGBO(126, 136, 144, 1.0);
+
+TextStyle labelRegular = const TextStyle(
+  fontSize: 15,
+);
+TextStyle labelBold = const TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+);
+
+EdgeInsets padding = const EdgeInsets.only(bottom: 10);

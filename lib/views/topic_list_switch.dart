@@ -88,8 +88,8 @@ class _SwitchListState extends State<SwitchList> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      widget.title,
-                      style: Theme.of(context).textTheme.headline3,
+                      widget.title.toUpperCase(),
+                      style: Theme.of(context).textTheme.headline1,
                     ),
                   ),
                   Expanded(

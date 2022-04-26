@@ -120,20 +120,20 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
-        height: 320,
-        constraints:
-            BoxConstraints(minHeight: _authMode == AuthMode.signUp ? 320 : 260),
+        // height: deviceSize.height * 0.43,
+        // constraints: const BoxConstraints(minHeight: 320),
         width: deviceSize.width * 0.75,
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image.asset(
                   'assets/images/headLogo.png',
                   fit: BoxFit.fitWidth,
-                  height: 70,
+                  // height: 70,
                 ),
                 TextFormField(
                   decoration: const InputDecoration(labelText: 'Usuario'),
@@ -169,8 +169,7 @@ class _AuthCardState extends State<AuthCard> {
                   const CircularProgressIndicator()
                 else
                   RaisedButton(
-                    child: Text(
-                        _authMode == AuthMode.login ? 'ACCEDER' : 'SIGN UP'),
+                    child: const Text('ACCEDER'),
                     onPressed: _submit,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),

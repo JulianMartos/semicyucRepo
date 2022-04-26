@@ -6,12 +6,6 @@ import '../models/utils.dart';
 class Profile extends StatelessWidget {
   Profile({Key? key}) : super(key: key);
 
-  TextStyle style = const TextStyle(
-    fontSize: 15,
-  );
-  TextStyle styleBold =
-      const TextStyle(fontSize: 15, fontWeight: FontWeight.bold);
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +15,7 @@ class Profile extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Text(
             "Datos Personales",
-            style: Theme.of(context).textTheme.headline3,
+            style: Theme.of(context).textTheme.headline1,
           ),
         ),
         Expanded(
@@ -40,78 +34,78 @@ class Profile extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text('Nombre: ', style: styleBold),
-                      // Text('Nombre', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Primer Apellido: ', style: styleBold),
-                      // Text('Apellido 1', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Segundo Apellido: ', style: styleBold),
-                      // Text('Apellido 2', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Telefono de Contacto: ', style: styleBold),
-                      // Text('999 999 9999', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Telefono particular: ', style: styleBold),
-                      // Text('999 999 9999', style: style),
-                    ],
-                  ),
-                  // Row(
-                  //   children: [
-                  //     Text('No. Socio: ', style: styleBold),
-                  //     Text('9999', style: style),
-                  //   ],
-                  // ),
-                  Row(
-                    children: [
-                      Text('Email: ', style: styleBold),
-                      // Text('usuario@semicyuc.es', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Nacionalidad: ', style: styleBold),
-                      // Text('Hospital Central General', style: style),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Text('Sexo: ', style: styleBold),
-                      // Text('No Definido', style: style),
-                    ],
-                  ),
-
-                  Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(3),
-                      color: lightBlue,
-                      border: Border.all(
-                        color: darkBlue,
-                        width: 1,
-                      ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Nombre', style: labelBold),
+                        Text('Jose Maria', style: labelRegular),
+                      ],
                     ),
-                    margin: const EdgeInsets.only(top: 100),
-                    alignment: Alignment.bottomCenter,
+                  ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Primer Apellido', style: labelBold),
+                        Text('Suárez', style: labelRegular),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Segundo Apellido', style: labelBold),
+                        Text('López', style: labelRegular),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Telefono de Contacto', style: labelBold),
+                        Text('649-949-923', style: labelRegular),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Telefono particular: ', style: labelBold),
+                        Text('649-342-123', style: labelRegular),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: padding,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Email: ', style: labelBold),
+                        Text('jmaria@hotmail.com', style: labelRegular),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    alignment: Alignment.center,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: FaIcon(
-                        FontAwesomeIcons.lightUserCircle,
-                        size: 200,
-                        color: Theme.of(context).primaryColor,
+                      child: CircleAvatar(
+                        radius: 100,
+                        backgroundColor: Colors.white,
+                        child: Image.network(
+                          'https://area-privada.semicyuc.org/img/persona-generico.png',
+                          fit: BoxFit.fill,
+                        ),
                       ),
                     ),
                   ),

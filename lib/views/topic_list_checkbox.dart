@@ -9,8 +9,12 @@ import './../utils/suscriptionTopics.dart';
 
 class CheckBoxList extends StatefulWidget {
   final int idCategoria;
+  final String emptyMessage;
+  final String title;
 
-  const CheckBoxList(this.idCategoria, {Key? key}) : super(key: key);
+  const CheckBoxList(this.idCategoria, this.title, this.emptyMessage,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<CheckBoxList> createState() => _CheckBoxListState();
@@ -59,11 +63,11 @@ class _CheckBoxListState extends State<CheckBoxList> {
               ),
             )
           : _listTopics.isEmpty
-              ? const Center(
+              ? Center(
                   child: Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      "No hay grupos de trabajo disponibles",
+                      widget.emptyMessage,
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -74,8 +78,8 @@ class _CheckBoxListState extends State<CheckBoxList> {
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
-                        "Grupos de Trabajo",
-                        style: Theme.of(context).textTheme.headline3,
+                        widget.title.toUpperCase(),
+                        style: Theme.of(context).textTheme.headline1,
                       ),
                     ),
                     Expanded(

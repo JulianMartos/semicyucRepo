@@ -90,8 +90,8 @@ class _SettingsPageState extends State<SettingsPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "Ajustes",
-                  style: Theme.of(context).textTheme.headline3,
+                  "Ajustes".toUpperCase(),
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ),
               Expanded(
@@ -112,7 +112,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ExpansionTile(
                           title: Text(
                             "Listas Generales",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           initiallyExpanded: false,
                           children: [
@@ -163,7 +163,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ExpansionTile(
                           title: Text(
                             "Grupos de Trabajo",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           initiallyExpanded: false,
                           children: [
@@ -215,7 +215,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         ExpansionTile(
                           title: Text(
                             "Listas Generales",
-                            style: Theme.of(context).textTheme.headline4,
+                            style: Theme.of(context).textTheme.headline2,
                           ),
                           initiallyExpanded: false,
                           children: [

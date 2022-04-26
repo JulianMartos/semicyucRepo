@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:semicyuc2/widgets/bottomBar.dart';
 
@@ -37,11 +38,17 @@ class GeneralScreen extends StatelessWidget {
                 Navigator.popUntil(context, ModalRoute.withName('/'));
                 Provider.of<Auth>(context, listen: false).logout();
               },
-              icon: const Icon(Icons.logout),
+              icon: const Icon(FontAwesomeIcons.signOut),
               color: Theme.of(context).primaryColor,
             ),
           ),
         ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(
+            MediaQuery.of(context).size.height * 0.03,
+          ),
+          child: SizedBox(),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.only(bottom: 10.0),

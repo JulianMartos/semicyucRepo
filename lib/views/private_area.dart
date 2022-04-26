@@ -29,10 +29,10 @@ class PrivateAreaWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.only(bottom: 10.0, left: 10, right: 10),
               child: AutoSizeText(
                 "Área de socio".toUpperCase(),
-                style: Theme.of(context).textTheme.headline3,
+                style: Theme.of(context).textTheme.headline1,
               ),
             ),
             Expanded(
@@ -61,7 +61,8 @@ class PrivateAreaWidget extends StatelessWidget {
                   const PrivateAreaButton(
                     FontAwesomeIcons.lightUsers,
                     "grupos de Trabajo",
-                    CheckBoxList(2),
+                    CheckBoxList(2, "Grupos de Trabajo",
+                        "No hay grupos de Trabajo Disponible."),
                   ),
                   const PrivateAreaButton(
                     FontAwesomeIcons.lightChartNetwork,
