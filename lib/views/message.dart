@@ -64,14 +64,14 @@ class MessageContent extends StatelessWidget {
           const SizedBox(height: 5),
           Text(
             _message.title,
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 5),
           if (_message.file != null)
             Link(
               target: LinkTarget.self,
-              uri: Uri.parse(
-                  "http://api.esmconsulting.es/uploads/" + _message.file!),
+              uri: Uri.parse("https://area-privada.semicyuc.org/uploads/" +
+                  _message.file!),
               builder: (ctx, followLink) => TextButton(
                 onPressed: followLink,
                 child: FittedBox(

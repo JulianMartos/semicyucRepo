@@ -23,7 +23,6 @@ class _SettingsPageState extends State<SettingsPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _isLoading = true;
   }
@@ -53,7 +52,6 @@ class _SettingsPageState extends State<SettingsPage> {
       await Provider.of<NotificationsTopics>(context, listen: false)
           .fetchTopics(1, Provider.of<Auth>(context, listen: false).token)
           .then((value) {
-        print("Lista 1");
         _topicList1 =
             Provider.of<NotificationsTopics>(context, listen: false).topics;
       });

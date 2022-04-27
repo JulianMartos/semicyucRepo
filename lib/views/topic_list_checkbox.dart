@@ -25,14 +25,12 @@ class _CheckBoxListState extends State<CheckBoxList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _isLoading = true;
   }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (_isLoading) {
       Provider.of<SuscriptionTopics>(context)
@@ -65,7 +63,7 @@ class _CheckBoxListState extends State<CheckBoxList> {
           : _listTopics.isEmpty
               ? Center(
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Text(
                       widget.emptyMessage,
                       textAlign: TextAlign.center,

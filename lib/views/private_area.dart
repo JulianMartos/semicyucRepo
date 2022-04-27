@@ -48,13 +48,13 @@ class PrivateAreaWidget extends StatelessWidget {
                 crossAxisSpacing: 10,
                 padding: const EdgeInsets.all(8.0),
                 childAspectRatio: 0.95,
-                children: [
+                children: const [
                   PrivateAreaButton(
                     FontAwesomeIcons.lightUser,
                     "mi \n PERFIL",
                     Profile(),
                   ),
-                  const PrivateAreaButton(
+                  PrivateAreaButton(
                     FontAwesomeIcons.lightList,
                     "listas GENERALES",
                     SwitchList(
@@ -63,13 +63,13 @@ class PrivateAreaWidget extends StatelessWidget {
                       "No hay listas disponibles.",
                     ),
                   ),
-                  const PrivateAreaButton(
+                  PrivateAreaButton(
                     FontAwesomeIcons.lightUsers,
                     "grupos de TRABAJO",
                     CheckBoxList(2, "Grupos de Trabajo",
                         "No hay grupos de Trabajo Disponible."),
                   ),
-                  const PrivateAreaButton(
+                  PrivateAreaButton(
                     FontAwesomeIcons.lightChartNetwork,
                     "otras SOCIEDADES",
                     SwitchList(
@@ -83,7 +83,7 @@ class PrivateAreaWidget extends StatelessWidget {
                     "\nVotaciones",
                     Voting(),
                   ),
-                  const PrivateAreaButton(
+                  PrivateAreaButton(
                     FontAwesomeIcons.lightCog,
                     "ajustes de Notificación",
                     SettingsPage(),

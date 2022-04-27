@@ -17,15 +17,11 @@ class SuscriptionTopics with ChangeNotifier {
     return [..._topics];
   }
 
-  List<int> _topicsToAdd = [];
+  final List<int> _topicsToAdd = [];
 
-  List<int> _topicsToRemove = [];
+  final List<int> _topicsToRemove = [];
 
   void addTopic(int id) {
-    print("Entre");
-    print(_topicsToAdd);
-    print(id);
-    print(_topicsToRemove.contains(id));
     if (_topicsToRemove.contains(id)) {
       _topicsToRemove.remove(id);
     } else {

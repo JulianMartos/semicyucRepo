@@ -133,7 +133,7 @@ class _CartegoriesScreenState extends State<MainScreen> {
             preferredSize: Size.fromHeight(
               MediaQuery.of(context).size.height * 0.03,
             ),
-            child: SizedBox(),
+            child: const SizedBox(),
           ),
         ),
         body: TabBarView(

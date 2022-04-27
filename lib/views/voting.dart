@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../models/utils.dart';
 
 class Voting extends StatelessWidget {
-  Voting({Key? key}) : super(key: key);
+  const Voting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +33,7 @@ class Voting extends StatelessWidget {
                 width: 1,
               ),
             ),
-            child: Center(
+            child: const Center(
               child: Text("No hay votaciones disponibles."),
             ),
           ),

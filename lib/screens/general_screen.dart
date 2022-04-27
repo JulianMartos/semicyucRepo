@@ -47,7 +47,7 @@ class GeneralScreen extends StatelessWidget {
           preferredSize: Size.fromHeight(
             MediaQuery.of(context).size.height * 0.03,
           ),
-          child: SizedBox(),
+          child: const SizedBox(),
         ),
       ),
       body: _widget,

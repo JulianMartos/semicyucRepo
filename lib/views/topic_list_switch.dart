@@ -23,32 +23,30 @@ class _SwitchListState extends State<SwitchList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _isLoading = true;
   }
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text('Ha ocurrido un error'),
-        content: Text(message),
-        actions: <Widget>[
-          TextButton(
-            child: const Text('Aceptar'),
-            onPressed: () {
-              Navigator.of(ctx).pop();
-            },
-          )
-        ],
-      ),
-    );
-  }
+  // void _showErrorDialog(String message) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (ctx) => AlertDialog(
+  //       title: const Text('Ha ocurrido un error'),
+  //       content: Text(message),
+  //       actions: <Widget>[
+  //         TextButton(
+  //           child: const Text('Aceptar'),
+  //           onPressed: () {
+  //             Navigator.of(ctx).pop();
+  //           },
+  //         )
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
     super.didChangeDependencies();
     if (_isLoading) {
       Provider.of<NotificationsTopics>(context)

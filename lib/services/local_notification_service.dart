@@ -38,7 +38,7 @@ class LocalNotificationService {
         msg.notification!.body,
         notDetails,
       );
-    } on Exception catch (e) {
+    } on Exception {
       // TODO
     }
   }
