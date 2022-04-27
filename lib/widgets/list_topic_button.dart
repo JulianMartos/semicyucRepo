@@ -1,3 +1,4 @@
+import 'package:SEMICYUC/screens/general_screen_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -7,8 +8,10 @@ class PrivateAreaButton extends StatelessWidget {
   final IconData icon;
   final String text;
   final Widget widget;
+  final String title;
 
-  const PrivateAreaButton(this.icon, this.text, this.widget, {Key? key})
+  const PrivateAreaButton(this.icon, this.text, this.widget, this.title,
+      {Key? key})
       : super(key: key);
 
   @override
@@ -17,9 +20,10 @@ class PrivateAreaButton extends StatelessWidget {
       onTap: () {
         Navigator.pushNamed(
           context,
-          GeneralScreen.routeName,
+          GeneralScreenWithTitle.routeName,
           arguments: {
             "widget": widget,
+            "title": title,
           },
         );
       },

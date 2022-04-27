@@ -1,3 +1,4 @@
+import 'package:SEMICYUC/screens/general_screen_with_title.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -89,6 +90,8 @@ class MyApp extends StatelessWidget {
                 routes: {
                   AuthScreen.routeName: (context) => const AuthScreen(),
                   GeneralScreen.routeName: (context) => const GeneralScreen(),
+                  GeneralScreenWithTitle.routeName: (context) =>
+                      const GeneralScreenWithTitle(),
                   MainScreen.routeName: (context) => const MainScreen(),
                   SplashScreen.routeName: (context) => const SplashScreen(),
                 },

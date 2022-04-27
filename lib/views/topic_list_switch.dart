@@ -9,9 +9,8 @@ import './../utils/auth.dart';
 class SwitchList extends StatefulWidget {
   final int idCategoria;
   final String emptyMessage;
-  final String title;
 
-  const SwitchList(this.idCategoria, this.title, this.emptyMessage, {Key? key})
+  const SwitchList(this.idCategoria, this.emptyMessage, {Key? key})
       : super(key: key);
 
   @override
@@ -78,55 +77,26 @@ class _SwitchListState extends State<SwitchList> {
                   ),
                 ),
               )
-            : Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10.0,
-                      right: 10,
-                      bottom: 10,
+            : ListView.separated(
+                separatorBuilder: (context, index) => Divider(
+                  height: 10,
+                  thickness: 1,
+                  indent: 10,
+                  endIndent: 10,
+                  color: darkBlue,
+                ),
+                itemCount: _listTopics.length,
+                itemBuilder: (ctx, idx) {
+                  return CheckboxListTile(
+                    activeColor: Theme.of(context).primaryColor,
+                    title: Text(
+                      _listTopics[idx].title,
+                      // style: Theme.of(context).textTheme.headline5,
                     ),
-                    child: Text(
-                      widget.title.toUpperCase(),
-                      style: Theme.of(context).textTheme.headline1,
-                    ),
-                  ),
-                  Expanded(
-                    // height: MediaQuery.of(context).size.height * 0.65,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(3),
-                        color: lightBlue,
-                        border: Border.all(
-                          color: darkBlue,
-                          width: 1,
-                        ),
-                      ),
-                      child: ListView.separated(
-                          separatorBuilder: (context, index) => Divider(
-                                height: 10,
-                                thickness: 1,
-                                indent: 10,
-                                endIndent: 10,
-                                color: darkBlue,
-                              ),
-                          itemCount: _listTopics.length,
-                          itemBuilder: (ctx, idx) {
-                            return CheckboxListTile(
-                              activeColor: Theme.of(context).primaryColor,
-                              title: Text(
-                                _listTopics[idx].title,
-                                // style: Theme.of(context).textTheme.headline5,
-                              ),
-                              value: true,
-                              onChanged: (bool? value) {},
-                            );
-                          }),
-                    ),
-                  ),
-                ],
+                    value: true,
+                    onChanged: (bool? value) {},
+                  );
+                },
               );
   }
 }

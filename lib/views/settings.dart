@@ -82,190 +82,149 @@ class _SettingsPageState extends State<SettingsPage> {
               size: 50.0,
             ),
           )
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 10.0,
-                  right: 10,
-                  bottom: 10,
-                ),
-                child: Text(
-                  "Ajustes".toUpperCase(),
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                  padding: const EdgeInsets.all(10.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(3),
-                    color: lightBlue,
-                    border: Border.all(
-                      color: darkBlue,
-                      width: 1,
-                    ),
+        : SingleChildScrollView(
+            child: Column(
+              children: [
+                ExpansionTile(
+                  title: Text(
+                    "Listas Generales",
+                    style: Theme.of(context).textTheme.headline2,
                   ),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        ExpansionTile(
-                          title: Text(
-                            "Listas Generales",
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                          initiallyExpanded: false,
-                          children: [
-                            _topicList1.isEmpty
-                                ? const ListTile(
-                                    title: Text("No hay listas disponibles."),
-                                  )
-                                : ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    separatorBuilder: (context, index) =>
-                                        Divider(
-                                          height: 10,
-                                          thickness: 1,
-                                          indent: 10,
-                                          endIndent: 10,
-                                          color: midBlue,
-                                        ),
-                                    shrinkWrap: true,
-                                    itemCount: _topicList1.length,
-                                    itemBuilder: (ctx, idx) {
-                                      return SwitchListTile.adaptive(
-                                        activeColor:
-                                            Theme.of(context).primaryColor,
-                                        title: Text(
-                                          _topicList1[idx].title,
-                                        ),
-                                        value: _topicList1[idx].subscribed,
-                                        onChanged: (value) async {
-                                          try {
-                                            setState(() {
-                                              _topicList1[idx].subscribe(
-                                                Provider.of<Auth>(context,
-                                                        listen: false)
-                                                    .token,
-                                              );
-                                            });
-                                          } on HttpException catch (error) {
-                                            _showErrorDialog(error.toString());
-                                          }
-                                        },
+                  initiallyExpanded: false,
+                  children: [
+                    _topicList1.isEmpty
+                        ? const ListTile(
+                            title: Text("No hay listas disponibles."),
+                          )
+                        : ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(
+                                  height: 10,
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: midBlue,
+                                ),
+                            shrinkWrap: true,
+                            itemCount: _topicList1.length,
+                            itemBuilder: (ctx, idx) {
+                              return SwitchListTile.adaptive(
+                                activeColor: Theme.of(context).primaryColor,
+                                title: Text(
+                                  _topicList1[idx].title,
+                                ),
+                                value: _topicList1[idx].subscribed,
+                                onChanged: (value) async {
+                                  try {
+                                    setState(() {
+                                      _topicList1[idx].subscribe(
+                                        Provider.of<Auth>(context,
+                                                listen: false)
+                                            .token,
                                       );
-                                    }),
-                          ],
-                        ),
-                        ExpansionTile(
-                          title: Text(
-                            "Grupos de Trabajo",
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                          initiallyExpanded: false,
-                          children: [
-                            _topicList2.isEmpty
-                                ? const ListTile(
-                                    title: Text(
-                                        "No hay grupos de trabajo disponibles"),
-                                  )
-                                : ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    separatorBuilder: (context, index) =>
-                                        Divider(
-                                          height: 10,
-                                          thickness: 1,
-                                          indent: 10,
-                                          endIndent: 10,
-                                          color: midBlue,
-                                        ),
-                                    shrinkWrap: true,
-                                    itemCount: _topicList2.length,
-                                    itemBuilder: (ctx, idx) {
-                                      return SwitchListTile.adaptive(
-                                        activeColor:
-                                            Theme.of(context).primaryColor,
-                                        title: Text(
-                                          _topicList2[idx].title,
-                                        ),
-                                        value: _topicList2[idx].subscribed,
-                                        onChanged: (value) async {
-                                          try {
-                                            setState(() {
-                                              _topicList2[idx].subscribe(
-                                                Provider.of<Auth>(context,
-                                                        listen: false)
-                                                    .token,
-                                              );
-                                            });
-                                          } on HttpException catch (error) {
-                                            _showErrorDialog(error.toString());
-                                          }
-                                        },
-                                      );
-                                    }),
-                          ],
-                        ),
-                        ExpansionTile(
-                          title: Text(
-                            "Sociedades Autonómicas y territoriales",
-                            style: Theme.of(context).textTheme.headline2,
-                          ),
-                          initiallyExpanded: false,
-                          children: [
-                            _topicList3.isEmpty
-                                ? const ListTile(
-                                    title:
-                                        Text("No hay sociedades disponibles"),
-                                  )
-                                : ListView.separated(
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    separatorBuilder: (context, index) =>
-                                        Divider(
-                                          height: 10,
-                                          thickness: 1,
-                                          indent: 10,
-                                          endIndent: 10,
-                                          color: midBlue,
-                                        ),
-                                    shrinkWrap: true,
-                                    itemCount: _topicList3.length,
-                                    itemBuilder: (ctx, idx) {
-                                      return SwitchListTile.adaptive(
-                                        activeColor:
-                                            Theme.of(context).primaryColor,
-                                        title: Text(
-                                          _topicList3[idx].title,
-                                        ),
-                                        value: _topicList3[idx].subscribed,
-                                        onChanged: (value) async {
-                                          try {
-                                            setState(() {
-                                              _topicList1[idx].subscribe(
-                                                Provider.of<Auth>(context,
-                                                        listen: false)
-                                                    .token,
-                                              );
-                                            });
-                                          } on HttpException catch (error) {
-                                            _showErrorDialog(error.toString());
-                                          }
-                                        },
-                                      );
-                                    }),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                                    });
+                                  } on HttpException catch (error) {
+                                    _showErrorDialog(error.toString());
+                                  }
+                                },
+                              );
+                            }),
+                  ],
                 ),
-              ),
-            ],
+                ExpansionTile(
+                  title: Text(
+                    "Grupos de Trabajo",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  initiallyExpanded: false,
+                  children: [
+                    _topicList2.isEmpty
+                        ? const ListTile(
+                            title: Text("No hay grupos de trabajo disponibles"),
+                          )
+                        : ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(
+                                  height: 10,
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: midBlue,
+                                ),
+                            shrinkWrap: true,
+                            itemCount: _topicList2.length,
+                            itemBuilder: (ctx, idx) {
+                              return SwitchListTile.adaptive(
+                                activeColor: Theme.of(context).primaryColor,
+                                title: Text(
+                                  _topicList2[idx].title,
+                                ),
+                                value: _topicList2[idx].subscribed,
+                                onChanged: (value) async {
+                                  try {
+                                    setState(() {
+                                      _topicList2[idx].subscribe(
+                                        Provider.of<Auth>(context,
+                                                listen: false)
+                                            .token,
+                                      );
+                                    });
+                                  } on HttpException catch (error) {
+                                    _showErrorDialog(error.toString());
+                                  }
+                                },
+                              );
+                            }),
+                  ],
+                ),
+                ExpansionTile(
+                  title: Text(
+                    "Sociedades Autonómicas y territoriales",
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                  initiallyExpanded: false,
+                  children: [
+                    _topicList3.isEmpty
+                        ? const ListTile(
+                            title: Text("No hay sociedades disponibles"),
+                          )
+                        : ListView.separated(
+                            physics: const NeverScrollableScrollPhysics(),
+                            separatorBuilder: (context, index) => Divider(
+                                  height: 10,
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: midBlue,
+                                ),
+                            shrinkWrap: true,
+                            itemCount: _topicList3.length,
+                            itemBuilder: (ctx, idx) {
+                              return SwitchListTile.adaptive(
+                                activeColor: Theme.of(context).primaryColor,
+                                title: Text(
+                                  _topicList3[idx].title,
+                                ),
+                                value: _topicList3[idx].subscribed,
+                                onChanged: (value) async {
+                                  try {
+                                    setState(() {
+                                      _topicList1[idx].subscribe(
+                                        Provider.of<Auth>(context,
+                                                listen: false)
+                                            .token,
+                                      );
+                                    });
+                                  } on HttpException catch (error) {
+                                    _showErrorDialog(error.toString());
+                                  }
+                                },
+                              );
+                            }),
+                  ],
+                ),
+              ],
+            ),
           );
   }
 }

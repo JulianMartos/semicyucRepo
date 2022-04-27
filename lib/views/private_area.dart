@@ -52,41 +52,47 @@ class PrivateAreaWidget extends StatelessWidget {
                   PrivateAreaButton(
                     FontAwesomeIcons.lightUser,
                     "mi \n PERFIL",
-                    Profile(),
+                    const Profile(),
+                    "Datos Personales",
                   ),
                   PrivateAreaButton(
                     FontAwesomeIcons.lightList,
                     "listas GENERALES",
                     SwitchList(
                       1,
-                      "Listas Generales",
                       "No hay listas disponibles.",
                     ),
+                    "Listas Generales",
                   ),
                   PrivateAreaButton(
                     FontAwesomeIcons.lightUsers,
                     "grupos de TRABAJO",
-                    CheckBoxList(2, "Grupos de Trabajo",
-                        "No hay grupos de Trabajo Disponible."),
+                    CheckBoxList(
+                      2,
+                      "No hay grupos de Trabajo Disponible.",
+                    ),
+                    "Grupos de Trabajo",
                   ),
                   PrivateAreaButton(
                     FontAwesomeIcons.lightChartNetwork,
                     "otras SOCIEDADES",
                     SwitchList(
                       3,
-                      "Sociedades Autonómicas y territoriales",
                       "No hay sociedades disponibles",
                     ),
+                    "Sociedades Autonómicas y territoriales",
                   ),
                   PrivateAreaButton(
                     FontAwesomeIcons.lightBoxBallot,
                     "\nVotaciones",
                     Voting(),
+                    "Votaciones",
                   ),
                   PrivateAreaButton(
                     FontAwesomeIcons.lightCog,
                     "ajustes de Notificación",
                     SettingsPage(),
+                    "Ajustes de Notificación",
                   ),
                 ],
               ),
