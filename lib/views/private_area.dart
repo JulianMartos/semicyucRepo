@@ -1,11 +1,12 @@
+import 'package:SEMICYUC/views/voting.dart';
 import 'package:flutter/material.dart';
 import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:semicyuc2/views/settings.dart';
-import 'package:semicyuc2/views/topic_list_switch.dart';
 
+import './../views/settings.dart';
+import './../views/topic_list_switch.dart';
 import './../widgets/list_topic_button.dart';
 import './profile.dart';
 import './topic_list_switch.dart';
@@ -29,7 +30,11 @@ class PrivateAreaWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(bottom: 10.0, left: 10, right: 10),
+              padding: const EdgeInsets.only(
+                bottom: 10.0,
+                left: 10,
+                right: 10,
+              ),
               child: AutoSizeText(
                 "Área de socio".toUpperCase(),
                 style: Theme.of(context).textTheme.headline1,
@@ -60,7 +65,7 @@ class PrivateAreaWidget extends StatelessWidget {
                   ),
                   const PrivateAreaButton(
                     FontAwesomeIcons.lightUsers,
-                    "grupos de Trabajo",
+                    "grupos de TRABAJO",
                     CheckBoxList(2, "Grupos de Trabajo",
                         "No hay grupos de Trabajo Disponible."),
                   ),
@@ -73,11 +78,16 @@ class PrivateAreaWidget extends StatelessWidget {
                       "No hay sociedades disponibles",
                     ),
                   ),
+                  PrivateAreaButton(
+                    FontAwesomeIcons.lightBoxBallot,
+                    "\nVotaciones",
+                    Voting(),
+                  ),
                   const PrivateAreaButton(
                     FontAwesomeIcons.lightCog,
                     "ajustes de Notificación",
                     SettingsPage(),
-                  )
+                  ),
                 ],
               ),
             ),

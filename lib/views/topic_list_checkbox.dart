@@ -76,7 +76,11 @@ class _CheckBoxListState extends State<CheckBoxList> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.only(
+                        left: 10.0,
+                        right: 10,
+                        bottom: 10,
+                      ),
                       child: Text(
                         widget.title.toUpperCase(),
                         style: Theme.of(context).textTheme.headline1,

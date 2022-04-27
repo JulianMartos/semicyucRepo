@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
-import 'package:semicyuc2/models/utils.dart';
+import './../models/utils.dart';
 
 import '../models/http_exception.dart';
 import '../models/topic.dart';

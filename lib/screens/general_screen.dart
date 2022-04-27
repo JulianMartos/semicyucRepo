@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:semicyuc2/widgets/bottomBar.dart';
 
+import './../widgets/bottomBar.dart';
 import './../utils/auth.dart';
 
 class GeneralScreen extends StatelessWidget {
@@ -50,10 +50,7 @@ class GeneralScreen extends StatelessWidget {
           child: SizedBox(),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(bottom: 10.0),
-        child: _widget,
-      ),
+      body: _widget,
       bottomNavigationBar: const BottomBar(),
     );
   }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:semicyuc2/utils/notificationTopics.dart';
 
-import '../models/http_exception.dart';
-import '../models/topic.dart';
+import './../utils/notificationTopics.dart';
 import '../models/utils.dart';
 import './../utils/auth.dart';
 
@@ -86,7 +84,11 @@ class _SwitchListState extends State<SwitchList> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.only(
+                      left: 10.0,
+                      right: 10,
+                      bottom: 10,
+                    ),
                     child: Text(
                       widget.title.toUpperCase(),
                       style: Theme.of(context).textTheme.headline1,
@@ -114,25 +116,14 @@ class _SwitchListState extends State<SwitchList> {
                               ),
                           itemCount: _listTopics.length,
                           itemBuilder: (ctx, idx) {
-                            return SwitchListTile.adaptive(
+                            return CheckboxListTile(
                               activeColor: Theme.of(context).primaryColor,
                               title: Text(
                                 _listTopics[idx].title,
                                 // style: Theme.of(context).textTheme.headline5,
                               ),
-                              value: _listTopics[idx].subscribed,
-                              onChanged: (value) async {
-                                try {
-                                  setState(() {
-                                    _listTopics[idx].subscribe(
-                                        Provider.of<Auth>(context,
-                                                listen: false)
-                                            .token);
-                                  });
-                                } on HttpException catch (error) {
-                                  _showErrorDialog(error.toString());
-                                }
-                              },
+                              value: true,
+                              onChanged: (bool? value) {},
                             );
                           }),
                     ),

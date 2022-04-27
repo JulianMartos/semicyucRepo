@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import 'package:semicyuc2/utils/auth.dart';
-import 'package:semicyuc2/utils/notificationTopics.dart';
 
-import '../models/http_exception.dart';
-import '../models/topic.dart';
-import '../models/utils.dart';
+import './../utils/auth.dart';
+import './../utils/notificationTopics.dart';
+
+import './../models/http_exception.dart';
+import './../models/utils.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -88,7 +88,11 @@ class _SettingsPageState extends State<SettingsPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.only(
+                  left: 10.0,
+                  right: 10,
+                  bottom: 10,
+                ),
                 child: Text(
                   "Ajustes".toUpperCase(),
                   style: Theme.of(context).textTheme.headline1,
@@ -117,7 +121,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           initiallyExpanded: false,
                           children: [
                             _topicList1.isEmpty
-                                ? ListTile(
+                                ? const ListTile(
                                     title: Text("No hay listas disponibles."),
                                   )
                                 : ListView.separated(
@@ -144,9 +148,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                         onChanged: (value) async {
                                           try {
                                             setState(() {
-                                              Provider.of<Topic>(context,
-                                                      listen: false)
-                                                  .subscribe(
+                                              _topicList1[idx].subscribe(
                                                 Provider.of<Auth>(context,
                                                         listen: false)
                                                     .token,
@@ -168,7 +170,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           initiallyExpanded: false,
                           children: [
                             _topicList2.isEmpty
-                                ? ListTile(
+                                ? const ListTile(
                                     title: Text(
                                         "No hay grupos de trabajo disponibles"),
                                   )
@@ -196,9 +198,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                         onChanged: (value) async {
                                           try {
                                             setState(() {
-                                              Provider.of<Topic>(context,
-                                                      listen: false)
-                                                  .subscribe(
+                                              _topicList2[idx].subscribe(
                                                 Provider.of<Auth>(context,
                                                         listen: false)
                                                     .token,
@@ -214,13 +214,13 @@ class _SettingsPageState extends State<SettingsPage> {
                         ),
                         ExpansionTile(
                           title: Text(
-                            "Listas Generales",
+                            "Sociedades Autonómicas y territoriales",
                             style: Theme.of(context).textTheme.headline2,
                           ),
                           initiallyExpanded: false,
                           children: [
                             _topicList3.isEmpty
-                                ? ListTile(
+                                ? const ListTile(
                                     title:
                                         Text("No hay sociedades disponibles"),
                                   )
@@ -248,9 +248,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                         onChanged: (value) async {
                                           try {
                                             setState(() {
-                                              Provider.of<Topic>(context,
-                                                      listen: false)
-                                                  .subscribe(
+                                              _topicList1[idx].subscribe(
                                                 Provider.of<Auth>(context,
                                                         listen: false)
                                                     .token,

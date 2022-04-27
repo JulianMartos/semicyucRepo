@@ -2,9 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:semicyuc2/utils/suscriptionTopics.dart';
-import 'package:semicyuc2/utils/usuario.dart';
 
+import './utils/suscriptionTopics.dart';
+import './utils/usuario.dart';
 import './models/utils.dart';
 
 import './screens/splash_screen.dart';
@@ -82,7 +82,7 @@ class MyApp extends StatelessWidget {
                     ),
                   ),
                   dividerColor: darkBlue,
-                  iconTheme: IconThemeData(
+                  iconTheme: const IconThemeData(
                     size: 30,
                   ),
                 ),

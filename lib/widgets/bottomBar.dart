@@ -12,10 +12,9 @@ class BottomBar extends StatelessWidget {
     return Container(
       height: Theme.of(context).platform == TargetPlatform.iOS ? 55 : 35,
       width: double.infinity,
-      padding: const EdgeInsets.only(top: 3),
-      alignment: Theme.of(context).platform == TargetPlatform.iOS
-          ? Alignment.topCenter
-          : Alignment.center,
+      padding: EdgeInsets.only(
+          top: Theme.of(context).platform == TargetPlatform.iOS ? 3 : 0),
+      alignment: Alignment.topCenter,
       child: FittedBox(
         child: Padding(
           padding: const EdgeInsets.only(top: 8.0),

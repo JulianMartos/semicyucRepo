@@ -1,12 +1,7 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:loader_overlay/loader_overlay.dart';
-import 'package:provider/provider.dart';
 
 import '../screens/general_screen.dart';
-import '../utils/auth.dart';
-import '../utils/notificationTopics.dart';
 
 class PrivateAreaButton extends StatelessWidget {
   final IconData icon;
@@ -50,8 +45,8 @@ class PrivateAreaButton extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: AutoSizeText(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(
                       text,
                       textScaleFactor: 1.0,
                       maxLines: 4,

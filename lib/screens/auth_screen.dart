@@ -1,9 +1,8 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:semicyuc2/models/http_exception.dart';
-import 'package:semicyuc2/utils/auth.dart';
+
+import './../models/http_exception.dart';
+import './../utils/auth.dart';
 
 enum AuthMode { signUp, login }
 
@@ -120,8 +119,6 @@ class _AuthCardState extends State<AuthCard> {
       ),
       elevation: 8.0,
       child: Container(
-        // height: deviceSize.height * 0.43,
-        // constraints: const BoxConstraints(minHeight: 320),
         width: deviceSize.width * 0.75,
         padding: const EdgeInsets.all(16.0),
         child: Form(
