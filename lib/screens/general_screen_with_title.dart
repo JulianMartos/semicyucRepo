@@ -17,6 +17,9 @@ class GeneralScreenWithTitle extends StatelessWidget {
 
     final _widget = args['widget'];
     final _title = args['title'];
+    final _button = args['button'];
+
+    print(_button);
 
     return Scaffold(
       appBar: AppBar(
@@ -54,6 +57,7 @@ class GeneralScreenWithTitle extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
             padding: const EdgeInsets.only(
@@ -68,10 +72,10 @@ class GeneralScreenWithTitle extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              margin: const EdgeInsets.only(
+              margin: EdgeInsets.only(
                 left: 10.0,
                 right: 10.0,
-                bottom: 10.0,
+                bottom: _button == null ? 10 : 0,
               ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(3),
@@ -84,6 +88,13 @@ class GeneralScreenWithTitle extends StatelessWidget {
               child: _widget,
             ),
           ),
+          if (_button != null)
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: _button,
+              ),
+            ),
         ],
       ),
       bottomNavigationBar: const BottomBar(),

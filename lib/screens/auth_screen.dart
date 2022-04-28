@@ -102,7 +102,7 @@ class _AuthCardState extends State<AuthCard> {
         );
       }
     } on HttpException catch (error) {
-      _showErrorDialog(error.toString());
+      _showErrorDialog("Los datos introducidos no son correctos.");
     }
 
     setState(() {

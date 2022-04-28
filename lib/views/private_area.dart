@@ -4,7 +4,10 @@ import 'package:loader_overlay/loader_overlay.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:provider/provider.dart';
 
+import '../utils/auth.dart';
+import '../utils/suscriptionTopics.dart';
 import './../views/settings.dart';
 import './../views/topic_list_switch.dart';
 import './../widgets/list_topic_button.dart';
@@ -17,6 +20,7 @@ class PrivateAreaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final _saveButton =
     return SafeArea(
       child: LoaderOverlay(
         useDefaultLoading: false,
@@ -48,14 +52,14 @@ class PrivateAreaWidget extends StatelessWidget {
                 crossAxisSpacing: 10,
                 padding: const EdgeInsets.all(8.0),
                 childAspectRatio: 0.95,
-                children: const [
-                  PrivateAreaButton(
+                children: [
+                  const PrivateAreaButton(
                     FontAwesomeIcons.lightUser,
                     "mi \n PERFIL",
                     const Profile(),
                     "Datos Personales",
                   ),
-                  PrivateAreaButton(
+                  const PrivateAreaButton(
                     FontAwesomeIcons.lightList,
                     "listas GENERALES",
                     SwitchList(
@@ -67,13 +71,41 @@ class PrivateAreaWidget extends StatelessWidget {
                   PrivateAreaButton(
                     FontAwesomeIcons.lightUsers,
                     "grupos de TRABAJO",
-                    CheckBoxList(
+                    const CheckBoxList(
                       2,
                       "No hay grupos de Trabajo Disponible.",
                     ),
                     "Grupos de Trabajo",
+                    button: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        side: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                          width: 2,
+                        ),
+                        primary: Theme.of(context).primaryColor,
+                        shape: const StadiumBorder(),
+                        fixedSize: const Size(250, 35),
+                      ),
+                      onPressed: () {
+                        context.loaderOverlay.show();
+                        Provider.of<SuscriptionTopics>(context, listen: false)
+                            .saveTopics(
+                                Provider.of<Auth>(context, listen: false).token)
+                            .then((value) {
+                          context.loaderOverlay.hide();
+                          value ? Navigator.of(context).pop() : null;
+                        });
+                      },
+                      child: Text(
+                        "Guardar".toUpperCase(),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                   ),
-                  PrivateAreaButton(
+                  const PrivateAreaButton(
                     FontAwesomeIcons.lightChartNetwork,
                     "otras SOCIEDADES",
                     SwitchList(
@@ -82,13 +114,13 @@ class PrivateAreaWidget extends StatelessWidget {
                     ),
                     "Sociedades Autonómicas y territoriales",
                   ),
-                  PrivateAreaButton(
+                  const PrivateAreaButton(
                     FontAwesomeIcons.lightBoxBallot,
                     "\nVotaciones",
                     Voting(),
                     "Votaciones",
                   ),
-                  PrivateAreaButton(
+                  const PrivateAreaButton(
                     FontAwesomeIcons.lightCog,
                     "ajustes de Notificación",
                     SettingsPage(),

@@ -1,4 +1,4 @@
-# semicyuc2
+# SEMYCIUC
 
 A new Flutter project.
 

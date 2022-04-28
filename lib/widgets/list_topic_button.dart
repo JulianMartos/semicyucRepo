@@ -9,9 +9,10 @@ class PrivateAreaButton extends StatelessWidget {
   final String text;
   final Widget widget;
   final String title;
+  final Widget? button;
 
   const PrivateAreaButton(this.icon, this.text, this.widget, this.title,
-      {Key? key})
+      {Key? key, this.button})
       : super(key: key);
 
   @override
@@ -24,6 +25,7 @@ class PrivateAreaButton extends StatelessWidget {
           arguments: {
             "widget": widget,
             "title": title,
+            "button": button,
           },
         );
       },

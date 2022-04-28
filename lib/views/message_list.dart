@@ -129,10 +129,21 @@ class _MessageListState extends State<MessageList> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                              side: BorderSide(
+                                color: Theme.of(context).primaryColor,
+                                width: 2,
+                              ),
                               primary: Theme.of(context).primaryColor,
+                              shape: const StadiumBorder(),
+                              fixedSize: const Size(150, 40),
                             ),
                             onPressed: _refreshMessages,
-                            child: const Text("Actualizar"),
+                            child: Text(
+                              "Actualizar",
+                              style: labelBold.copyWith(
+                                fontSize: 14,
+                              ),
+                            ),
                           )
                         ],
                       )
