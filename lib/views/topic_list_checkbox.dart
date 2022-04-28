@@ -68,38 +68,56 @@ class _CheckBoxListState extends State<CheckBoxList> {
                     ),
                   ),
                 )
-              : ListView.separated(
-                  separatorBuilder: (context, index) => Divider(
-                        height: 10,
-                        thickness: 1,
-                        indent: 10,
-                        endIndent: 10,
-                        color: darkBlue,
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const Padding(
+                        padding: EdgeInsets.all(12.0),
+                        child: Text(
+                          "Solicito pertenecer a los siguientes grupos de trabajo",
+                        ),
                       ),
-                  itemCount: _listTopics.length,
-                  itemBuilder: (ctx, idx) {
-                    bool _checked = _listTopics[idx].subscribed;
-                    return CheckboxListTile(
-                      activeColor: Theme.of(context).primaryColor,
-                      title: Text(
-                        _listTopics[idx].title,
-                        // style: Theme.of(context).textTheme.headline5,
+                      Container(
+                        child: ListView.separated(
+                            separatorBuilder: (context, index) => Divider(
+                                  height: 10,
+                                  thickness: 1,
+                                  indent: 10,
+                                  endIndent: 10,
+                                  color: darkBlue,
+                                ),
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: _listTopics.length,
+                            itemBuilder: (ctx, idx) {
+                              bool _checked = _listTopics[idx].subscribed;
+                              return CheckboxListTile(
+                                activeColor: Theme.of(context).primaryColor,
+                                title: Text(
+                                  _listTopics[idx].title,
+                                  // style: Theme.of(context).textTheme.headline5,
+                                ),
+                                value: _checked,
+                                onChanged: (value) async {
+                                  if (value!) {
+                                    Provider.of<SuscriptionTopics>(context,
+                                            listen: false)
+                                        .addTopic(_listTopics[idx].id);
+                                  } else {
+                                    Provider.of<SuscriptionTopics>(context,
+                                            listen: false)
+                                        .removeTopic(_listTopics[idx].id);
+                                  }
+                                  setState(() {
+                                    _listTopics[idx].subscribed = value;
+                                  });
+                                },
+                              );
+                            }),
                       ),
-                      value: _checked,
-                      onChanged: (value) async {
-                        if (value!) {
-                          Provider.of<SuscriptionTopics>(context, listen: false)
-                              .addTopic(_listTopics[idx].id);
-                        } else {
-                          Provider.of<SuscriptionTopics>(context, listen: false)
-                              .removeTopic(_listTopics[idx].id);
-                        }
-                        setState(() {
-                          _listTopics[idx].subscribed = value;
-                        });
-                      },
-                    );
-                  }),
+                    ],
+                  ),
+                ),
     );
   }
 }

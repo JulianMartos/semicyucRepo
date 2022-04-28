@@ -19,8 +19,6 @@ class GeneralScreenWithTitle extends StatelessWidget {
     final _title = args['title'];
     final _button = args['button'];
 
-    print(_button);
-
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -55,47 +53,46 @@ class GeneralScreenWithTitle extends StatelessWidget {
           child: const SizedBox(),
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(
-              left: 10.0,
-              right: 10,
-              bottom: 10,
-            ),
-            child: Text(
+      body: Padding(
+        padding: const EdgeInsets.only(
+          left: 10.0,
+          right: 10,
+          // bottom: 10,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text(
               _title.toUpperCase(),
               style: Theme.of(context).textTheme.headline1,
             ),
-          ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(
-                left: 10.0,
-                right: 10.0,
-                bottom: _button == null ? 10 : 0,
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.only(
+                  top: 5,
+                  bottom: _button == null ? 10 : 0,
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(3),
+                  color: lightBlue,
+                  border: Border.all(
+                    color: darkBlue,
+                    width: 1,
+                  ),
+                ),
+                child: _widget,
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(3),
-                color: lightBlue,
-                border: Border.all(
-                  color: darkBlue,
-                  width: 1,
+            ),
+            if (_button != null)
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: _button,
                 ),
               ),
-              child: _widget,
-            ),
-          ),
-          if (_button != null)
-            Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: _button,
-              ),
-            ),
-        ],
+          ],
+        ),
       ),
       bottomNavigationBar: const BottomBar(),
     );

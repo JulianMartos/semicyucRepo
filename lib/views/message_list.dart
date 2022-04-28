@@ -105,6 +105,7 @@ class _MessageListState extends State<MessageList> {
           Expanded(
             // height: MediaQuery.of(context).size.height * 0.65,
             child: Container(
+              width: MediaQuery.of(context).size.width,
               margin:
                   const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10),
               decoration: BoxDecoration(
@@ -120,32 +121,37 @@ class _MessageListState extends State<MessageList> {
                 displacement: 10,
                 onRefresh: _refreshMessages,
                 child: _messages.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            "No hay mensajes en los topicos a los que esta subscrito",
-                            textAlign: TextAlign.center,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              side: BorderSide(
-                                color: Theme.of(context).primaryColor,
-                                width: 2,
-                              ),
-                              primary: Theme.of(context).primaryColor,
-                              shape: const StadiumBorder(),
-                              fixedSize: const Size(150, 40),
+                    ? Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "No hay mensajes en este momento",
+                              textAlign: TextAlign.center,
                             ),
-                            onPressed: _refreshMessages,
-                            child: Text(
-                              "Actualizar",
-                              style: labelBold.copyWith(
-                                fontSize: 14,
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  side: BorderSide(
+                                    color: Theme.of(context).primaryColor,
+                                    width: 2,
+                                  ),
+                                  primary: Theme.of(context).primaryColor,
+                                  shape: const StadiumBorder(),
+                                  fixedSize: const Size(150, 40),
+                                ),
+                                onPressed: _refreshMessages,
+                                child: Text(
+                                  "Actualizar",
+                                  style: labelBold.copyWith(
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
-                        ],
+                            )
+                          ],
+                        ),
                       )
                     : ListView.separated(
                         itemBuilder: (ctx, index) {
